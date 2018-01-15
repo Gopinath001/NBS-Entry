@@ -20,7 +20,7 @@ public class NBS {
         // TODO code application logic here
         Mainf main = new Mainf();
         main.setVisible(true);
-        
+        //hssf for the excel therefore only apache poi is needed.
     }
     
 }
