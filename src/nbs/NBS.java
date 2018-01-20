@@ -5,6 +5,7 @@
  */
 package nbs;
 
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
@@ -15,12 +16,17 @@ public class NBS {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         Mainf main = new Mainf();
         main.setVisible(true);
         //hssf for the excel therefore only apache poi is needed.
+        
+        //test
+        System.out.println("testing");
+        excel_working.main();
     }
     
 }
