@@ -30,7 +30,7 @@ public class excel_working {
         Sheet Sht = WrB.createSheet("Contents");
         Font FntH = WrB.createFont();
         FntH.setBold(true);
-        FntH.setFontHeight((short)14);
+        FntH.setFontHeight((short)20);
         CellStyle FntHCellStle = WrB.createCellStyle();
         FntHCellStle.setFont(FntH);
        
@@ -59,7 +59,7 @@ public class excel_working {
         
         //actual writing to file
         try {
-            FileOutputStream create = new FileOutputStream("month-here.xls");
+            FileOutputStream create = new FileOutputStream("month-here.xlsx");
             WrB.write(create);
             create.close();
         } catch (FileNotFoundException ex) {
