@@ -30,7 +30,7 @@ public class excel_working {
         Sheet Sht = WrB.createSheet("Contents");
         Font FntH = WrB.createFont();
         FntH.setBold(true);
-        FntH.setFontHeight((short)20);
+        FntH.setFontHeight((short)11);
         CellStyle FntHCellStle = WrB.createCellStyle();
         FntHCellStle.setFont(FntH);
        
@@ -39,7 +39,7 @@ public class excel_working {
         for(int i =0;i<Columns.length;i++){
             Cell  xCel = hRow.createCell(i);
             xCel.setCellValue(Columns[i]);
-            xCel.setCellValue(Columns[i]);
+            xCel.setCellStyle(FntHCellStle);
         }
                 
                 
