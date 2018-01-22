@@ -50,7 +50,7 @@ public class excel_working {
         Sheet Sht = WrB.createSheet("Contents");
         Font FntH = WrB.createFont();
         FntH.setBold(true);
-        FntH.setFontHeight((short)11);
+        //FntH.setFontHeight((short)11); causes error in office 16
         CellStyle FntHCellStle = WrB.createCellStyle();
         FntHCellStle.setFont(FntH);
        
