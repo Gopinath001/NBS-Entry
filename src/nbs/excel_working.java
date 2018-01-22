@@ -5,6 +5,7 @@
  */
 package nbs;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,7 +25,12 @@ public class excel_working {
     private static String[] Columns = {"Col_0", "Col_1", "Col_2"};
     
     public static void main() throws IOException{
-    
+        
+        new File("month-here.xlsx").isFile();{
+        System.out.println("file exists");
+        System.exit(0);
+    }
+      
         Workbook WrB = new XSSFWorkbook();
         CreationHelper createHelper = WrB.getCreationHelper();
         Sheet Sht = WrB.createSheet("Contents");
