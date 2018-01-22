@@ -24,13 +24,27 @@ public class excel_working {
     
     private static String[] Columns = {"Col_0", "Col_1", "Col_2"};
     
-    public static void main() throws IOException{
+    public static void main() throws IOException {
         
-        new File("month-here.xlsx").isFile();{
-        System.out.println("file exists");
-        System.exit(0);
-    }
+        boolean isExists = new File("month-here.xlsx").isFile();
+        if(!isExists){
+        System.out.println("record not exists");
+        createRecord();
+        }
+        else
+        {
+            System.out.println("record exists");
+            System.exit(0);
+        }
+        
+        
       
+
+    }
+    
+    private static void createRecord() throws IOException{
+        
+        System.out.println("creating record");
         Workbook WrB = new XSSFWorkbook();
         CreationHelper createHelper = WrB.getCreationHelper();
         Sheet Sht = WrB.createSheet("Contents");
@@ -71,6 +85,7 @@ public class excel_working {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(excel_working.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
     }
     
     class DataToFeed
