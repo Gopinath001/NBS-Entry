@@ -5,8 +5,6 @@
  */
 package nbs;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author Zero
@@ -18,7 +16,7 @@ public class NBS {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Mainf main = new Mainf();
+        Start main = new Start();
         main.setVisible(true);
         
     }

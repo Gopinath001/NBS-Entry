@@ -5,21 +5,17 @@
  */
 package nbs;
 
+import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import static java.lang.System.exit;
-import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -36,6 +32,7 @@ public class Mainf extends javax.swing.JFrame {
      */
     public Mainf() {
         initComponents();
+        getContentPane().setBackground(Color.lightGray);
     }
 
     /**
@@ -48,8 +45,9 @@ public class Mainf extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        date = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -63,30 +61,33 @@ public class Mainf extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        nightt = new javax.swing.JRadioButton();
-        dayy = new javax.swing.JRadioButton();
+        dayy = new javax.swing.JCheckBox();
+        nightt = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        aaa = new javax.swing.JComboBox<>();
+        da = new org.jdesktop.swingx.JXDatePicker();
+        mregular = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        mrate = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        mdes = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel1.setText("Date");
 
-        date.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dateActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel2.setText("Starting Hour");
 
-        jLabel3.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel3.setText("Closing Hour");
 
-        jLabel4.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel4.setText("Rent");
 
-        jLabel5.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel5.setText("Diesel Rate");
 
         sh.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +108,7 @@ public class Mainf extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel6.setText("Diesel ");
 
         dq.addActionListener(new java.awt.event.ActionListener() {
@@ -123,58 +124,122 @@ public class Mainf extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel8.setText("Shift");
 
-        buttonGroup1.add(nightt);
+        dayy.setFont(new java.awt.Font("Myriad Pro", 1, 11)); // NOI18N
+        dayy.setText("Day");
+
+        nightt.setFont(new java.awt.Font("Myriad Pro", 1, 11)); // NOI18N
         nightt.setText("Night");
 
-        buttonGroup1.add(dayy);
-        dayy.setText("Day");
-        dayy.addActionListener(new java.awt.event.ActionListener() {
+        jLabel9.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
+        jLabel9.setText("Vechical ");
+
+        aaa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "v1", "v2", "v3", "v4" }));
+        aaa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dayyActionPerformed(evt);
+                aaaActionPerformed(evt);
             }
         });
+
+        da.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                daActionPerformed(evt);
+            }
+        });
+
+        mregular.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nothing", "Engine oil \t        250", "Hydraulic oil\t        1000", "Hydraulic strainer  250", "Air filter                 250", "Diesel filter\t         250", "Track motor oil       1000", "Swing motor oil       500", "Swing bearing         500" }));
+        mregular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mregularActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
+        jLabel11.setText("Maintance Regular ");
+
+        jLabel12.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
+        jLabel12.setText("Maintance RS");
+
+        mrate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mrateActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
+        jLabel13.setText("Description");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addGap(95, 95, 95)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel8))
-                            .addGap(98, 98, 98)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(re)
-                                    .addComponent(ds)
-                                    .addComponent(dq, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                .addComponent(dayy)
-                                .addComponent(nightt))
-                            .addGap(237, 237, 237))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGap(76, 76, 76)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                                .addComponent(sh)
-                                .addComponent(ch))
-                            .addGap(130, 130, 130))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(104, 104, 104)
+                                .addComponent(aaa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6))
+                                        .addGap(90, 90, 90))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(130, 130, 130)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(re, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(dq, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ds, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(76, 76, 76)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(nightt)
+                                            .addComponent(dayy)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(77, 77, 77)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(sh, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ch, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel11))
+                        .addGap(85, 85, 85)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(mregular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(mrate))
+                                .addGap(55, 55, 55)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(145, 145, 145))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,41 +247,62 @@ public class Mainf extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel7))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addComponent(jLabel7)
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(aaa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(dayy))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nightt)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(sh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(ch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(re, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(ds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(dq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                            .addComponent(da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(59, 59, 59)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(sh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(ch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(re, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(ds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(dq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(dayy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nightt))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(mregular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(mrate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(301, 301, 301)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -239,47 +325,45 @@ public class Mainf extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dqActionPerformed
 
-    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dateActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-String dateS = date.getText(); // form date string in above format
-
-String formattedDate;
-        try {
-            formattedDate = sdf.format(sdf.parse(dateS));
-        } catch (ParseException ex) {
-           String er="Enter correct date";
-           JOptionPane.showMessageDialog(null,er);
-           Logger.getLogger(Mainf.class.getName()).log(Level.SEVERE, null, ex);
-          
-        }
+        // date picker
+    Date oDate = da.getDate();        
+    DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    String dateS = sdf.format(oDate);
+        
+                // vechical name
+           String vname=(String)aaa.getSelectedItem();
           // st is strating hour
-          int st=Integer.parseInt(sh.getText());
+          int shour=Integer.parseInt(sh.getText());
           // cl is closing hour
-          int cl=Integer.parseInt(ch.getText());
+          int chour=Integer.parseInt(ch.getText());
           // r is rent
-          int r=Integer.parseInt(re.getText());
+          int rent=Integer.parseInt(re.getText());
           // dr is diesel rate
-          int dr=Integer.parseInt(ds.getText());
+          int drate=Integer.parseInt(ds.getText());
           //dq is diesel quantity 
-          int d=Integer.parseInt(dq.getText());
+          int dquant=Integer.parseInt(dq.getText());
+          // regular maintance
+           String maregular=(String)mregular.getSelectedItem();
+           // maintance rate
+           int marate=Integer.parseInt(mrate.getText());
+           // maintance Description
+           String mades=mdes.getText();
+          
             // total hour running
-          int dif=cl-st;
+          int dif=chour-shour;
           // today running
-          int ea=dif*r;
+          int ea=dif*rent;
           // total earning
-          int tot=ea-(d*dr);
-          String s="";
+          int tot=(ea-(dquant*drate))-marate;
+          String day="",ni8="";
           // shift type   seletion    
-            if(dayy.isSelected())   { 
-            s="Day";}
-            else if(nightt.isSelected())   { 
-             s="Night";    
-            }
+            if(dayy.isSelected())    
+            day="Day";
+            if(nightt.isSelected())    
+             ni8="Night";    
+           String sf=day+"/"+ni8; 
            
            FileInputStream FILE_NAME = null; 
         try {
@@ -299,7 +383,7 @@ String formattedDate;
         }
        
         Object[][] datatypes = {
-                {dateS,s, st, cl,r,dif,dr,d,ea,tot}              
+                {dateS,vname,sf,shour,chour,rent,dif,drate,dquant,ea,maregular,marate,tot,mades}              
         };
 
         int rowNum =sheet.getLastRowNum();
@@ -333,12 +417,26 @@ String formattedDate;
 
         System.out.println("Done");
         setVisible(false);
+        
+        
         exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void dayyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayyActionPerformed
+    private void aaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dayyActionPerformed
+    }//GEN-LAST:event_aaaActionPerformed
+
+    private void daActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_daActionPerformed
+
+    private void mregularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mregularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mregularActionPerformed
+
+    private void mrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mrateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -376,14 +474,20 @@ String formattedDate;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> aaa;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JTextField ch;
-    private javax.swing.JTextField date;
-    private javax.swing.JRadioButton dayy;
+    private org.jdesktop.swingx.JXDatePicker da;
+    private javax.swing.JCheckBox dayy;
     private javax.swing.JTextField dq;
     private javax.swing.JTextField ds;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -391,7 +495,11 @@ String formattedDate;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JRadioButton nightt;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField mdes;
+    private javax.swing.JTextField mrate;
+    private javax.swing.JComboBox<String> mregular;
+    private javax.swing.JCheckBox nightt;
     private javax.swing.JTextField re;
     private javax.swing.JTextField sh;
     // End of variables declaration//GEN-END:variables
