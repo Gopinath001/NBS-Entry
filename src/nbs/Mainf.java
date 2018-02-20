@@ -11,11 +11,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import static java.lang.System.exit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Calendar;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -72,6 +77,7 @@ public class Mainf extends javax.swing.JFrame {
         mrate = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         mdes = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,6 +177,13 @@ public class Mainf extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel13.setText("Description");
 
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,21 +233,26 @@ public class Mainf extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(sh, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(ch, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(115, 115, 115)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel11))
-                        .addGap(85, 85, 85)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mregular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(mrate)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(115, 115, 115)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel11))
+                                .addGap(85, 85, 85)
+                                .addComponent(mregular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(279, 279, 279)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(mrate)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 18, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(244, 244, 244))))
         );
         layout.setVerticalGroup(
@@ -275,8 +293,7 @@ public class Mainf extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(ds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE))
+                            .addComponent(ds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,12 +309,13 @@ public class Mainf extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dq, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(dq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -322,71 +340,53 @@ public class Mainf extends javax.swing.JFrame {
     }//GEN-LAST:event_dqActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        // date picker
-    Date oDate = da.getDate();        
-    DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    String dateS = sdf.format(oDate);
-        
-                // vechical name
-           String vname=(String)aaa.getSelectedItem();
-          // st is strating hour
-          int shour=Integer.parseInt(sh.getText());
-          // cl is closing hour
-          int chour=Integer.parseInt(ch.getText());
-          // r is rent
-          int rent=Integer.parseInt(re.getText());
-          // dr is diesel rate
-          int drate=Integer.parseInt(ds.getText());
-          //dq is diesel quantity 
-          int dquant=Integer.parseInt(dq.getText());
-          // regular maintance
-           String maregular=(String)mregular.getSelectedItem();
-           // maintance rate
-           int marate=Integer.parseInt(mrate.getText());
-           // maintance Description
-           String mades=mdes.getText();
-          
-            // total hour running
-          int dif=chour-shour;
-          // today running
-          int ea=dif*rent;
-          // total earning
-          int tot=(ea-(dquant*drate))-marate;
-          String day="",ni8="";
-          // shift type   seletion    
-            if(dayy.isSelected())    
+        Date oDate = da.getDate();
+        DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String dateS =sdf.format(oDate);
+        String vname=(String)aaa.getSelectedItem();
+        int shour=Integer.parseInt(sh.getText());
+        int chour=Integer.parseInt(ch.getText());
+        int rent=Integer.parseInt(re.getText());
+        int drate=Integer.parseInt(ds.getText());
+        int dquant=Integer.parseInt(dq.getText());
+        String maregular=(String)mregular.getSelectedItem();
+        int marate=Integer.parseInt(mrate.getText());
+        String mades=mdes.getText();
+        int dif=chour-shour;
+        int ea=dif*rent;
+        int tot=(ea-(dquant*drate))-marate;
+        String day="",ni8="";
+        if(dayy.isSelected())
             day="Day";
-            if(nightt.isSelected())    
-             ni8="Night";    
-           String sf=day+"/"+ni8; 
-           
-           FileInputStream FILE_NAME = null; 
+        if(nightt.isSelected())
+            ni8="Night";
+        String sf=day+"/"+ni8;
+        FileInputStream FILE_NAME = null;
+        try {
+            FileInputStream FILE = new FileInputStream("test.xlsx");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Mainf.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             FILE_NAME = new FileInputStream("test.xlsx");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Mainf.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         XSSFWorkbook workbook = null;
         XSSFSheet sheet = null ;
         try {
-                workbook = new XSSFWorkbook(FILE_NAME ); //If there is already data in a workbook
-                sheet = workbook.getSheetAt(0);
-           
+            workbook = new XSSFWorkbook(FILE_NAME ); //If there is already data in a workbook
+            sheet = workbook.getSheetAt(0);
+            
         } catch (IOException ex) {
             Logger.getLogger(Mainf.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
         Object[][] datatypes = {
-                {dateS,vname,sf,shour,chour,rent,dif,drate,dquant,ea,maregular,marate,tot,mades}              
+            {dateS,vname,sf,shour,chour,rent,dif,drate,dquant,ea,maregular,marate,tot,mades}
         };
-
         int rowNum =sheet.getLastRowNum();
         System.out.println("Creating excel");
-        
-
-       for (Object[] datatype : datatypes) {
+        for (Object[] datatype : datatypes) {
             Row row = sheet.createRow(rowNum+1);
             int colNum = 0;
             for (Object field : datatype) {
@@ -397,7 +397,7 @@ public class Mainf extends javax.swing.JFrame {
                     cell.setCellValue((Integer) field);
                 }
             }
-        }
+        }            
         try {
             FILE_NAME.close(); //Close the InputStream
         } catch (IOException ex) {
@@ -410,12 +410,52 @@ public class Mainf extends javax.swing.JFrame {
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
         }
+          try
+    {
+      // create a mysql database connection
+      String myDriver = "org.gjt.mm.mysql.Driver";
+      String myUrl = "jdbc:mysql://localhost/test";
+      Class.forName(myDriver);
+      Connection conn = DriverManager.getConnection(myUrl, "root", "");
+    
+      // create a sql date object so we can use it in our INSERT statement
+      Calendar calendar = Calendar.getInstance();
+      java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
-        System.out.println("Done");
-        setVisible(false);
+      // the mysql insert statement
+      String query = " insert into hit (Date,vn,Shift,Sh,Ch,Rent,RHour,DRate,DQuantity,Earning,MRegular,MRate,total,MDes)"
+        + " values (?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?)";
+
+      // create the mysql insert preparedstatement
+      PreparedStatement preparedStmt = conn.prepareStatement(query);
+          preparedStmt.setString(1,dateS);
+          preparedStmt.setString(2, vname);
+          preparedStmt.setString(3, sf);
+          preparedStmt.setInt(4, shour);
+          preparedStmt.setInt(5, chour);
+          preparedStmt.setInt(6, rent);
+          preparedStmt.setInt(7, dif);
+          preparedStmt.setInt(8, drate);
+          preparedStmt.setInt(9, dquant);
+          preparedStmt.setInt(10, ea);
+          preparedStmt.setString(11, maregular);
+          preparedStmt.setInt(12, marate);
+          preparedStmt.setInt(13, tot);
+          preparedStmt.setString(14, mades);
+
+      // execute the preparedstatement
+      preparedStmt.execute();
+      
+      conn.close();
+    }
+    catch (Exception e)
+    {
+      System.err.println("Got an exception!");
+      System.err.println(e.getMessage());
+    }
+  
         
-        
-        exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void aaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaaActionPerformed
@@ -433,6 +473,13 @@ public class Mainf extends javax.swing.JFrame {
     private void mrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mrateActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Start m=new Start();
+        m.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -480,6 +527,7 @@ public class Mainf extends javax.swing.JFrame {
     private javax.swing.JTextField dq;
     private javax.swing.JTextField ds;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
