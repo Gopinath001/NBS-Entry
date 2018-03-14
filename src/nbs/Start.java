@@ -51,6 +51,11 @@ public class Start extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton2.setText("Monthly Bill");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton3.setText("Analysis Report");
@@ -134,6 +139,14 @@ public class Start extends javax.swing.JFrame {
         main.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+         Monthlyreport main = new  Monthlyreport ();
+        main.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

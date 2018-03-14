@@ -58,12 +58,12 @@ public class Analysis extends javax.swing.JFrame {
         jLabel3.setText("Total hour");
 
         jLabel4.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
-        jLabel4.setText("Total diesel rate");
+        jLabel4.setText("Maintance");
 
         jLabel5.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel5.setText("Diesel  quantity");
 
-        vt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hitache", "Lorry" }));
+        vt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V1", "V2", "V3", "V4" }));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,11 +97,11 @@ public class Analysis extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(th)
                     .addComponent(tdr)
-                    .addComponent(dq, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dq)
+                    .addComponent(jTextField1))
                 .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(edd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

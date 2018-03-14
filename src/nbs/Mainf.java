@@ -5,6 +5,7 @@
  */
 package nbs;
 
+import com.sun.xml.internal.ws.api.pipe.Engine;
 import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import static java.lang.System.exit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -235,24 +237,23 @@ public class Mainf extends javax.swing.JFrame {
                                             .addComponent(ch, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(115, 115, 115)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel11))
-                                .addGap(85, 85, 85)
-                                .addComponent(mregular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(279, 279, 279)
                                 .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(mrate)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 18, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel12)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel11))
+                                        .addGap(85, 85, 85)
+                                        .addComponent(mregular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(mrate, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(244, 244, 244))))
         );
         layout.setVerticalGroup(
@@ -445,7 +446,111 @@ public class Mainf extends javax.swing.JFrame {
 
       // execute the preparedstatement
       preparedStmt.execute();
-      
+      switch(maregular)
+      {
+          case "Engine oil 250"  : 
+      PreparedStatement pst = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+        pst.setString(1,vname ); 
+        ResultSet r = pst.executeQuery(); 
+        int i=r.getInt(2),flag=0;
+        if(i<chour)
+          flag=1;  
+       
+          PreparedStatement p = conn.prepareStatement("insert into v1  (en) values (?) ");
+        p.setInt(1,chour); 
+         ResultSet r2 = p.executeQuery();
+        break;
+       case "Hydraulic oil 1000"  : 
+      PreparedStatement pst1 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+        pst1.setString(1,vname ); 
+         ResultSet r1 = pst1.executeQuery(); 
+        int i1=r1.getInt(3),flag1=0;
+        if(i1<chour)
+          flag1=1; 
+         PreparedStatement p2 = conn.prepareStatement("REPLACE INTO v1(vn,hyo)\n" +
+"VALUES(?,?); ");
+         p2.setString(1,vname);
+        p2.setInt(2,chour); 
+         ResultSet rr = p2.executeQuery();
+        break;
+         case "Hydraulic strainer  250"  : 
+      PreparedStatement pst2 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+        pst2.setString(1,vname ); 
+         ResultSet r2 = pst2.executeQuery(); 
+        int i2=r2.getInt(4),flag2=0;
+        if(i2<chour)
+          flag2=1; 
+        
+        PreparedStatement ps1 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
+        ps1.setInt(1,chour); 
+         ResultSet re1 = ps1.executeQuery(); 
+        break;
+          case "Air filter 250"  : 
+      PreparedStatement pst3 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+        pst3.setString(1,vname ); 
+         ResultSet r3 = pst3.executeQuery(); 
+        int i3=r3.getInt(5),flag3=0;
+        if(i3<chour)
+          flag3=1; 
+        
+        PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
+        ps2.setInt(1,chour); 
+         ResultSet re2 = ps2.executeQuery(); 
+        break;
+              case "Diesel filter 250"  : 
+      PreparedStatement pst4 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+        pst4.setString(1,vname ); 
+         ResultSet r4 = pst4.executeQuery(); 
+        int i4=r4.getInt(6),flag4=0;
+        if(i4<chour)
+          flag4=1;  
+        
+        PreparedStatement ps3 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
+        ps3.setInt(1,chour); 
+         ResultSet re = ps3.executeQuery(); 
+        break;
+        
+              case "Track motor oil 1000"  : 
+      PreparedStatement pst5 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+        pst5.setString(1,vname ); 
+         ResultSet r5 = pst5.executeQuery(); 
+        int i5=r5.getInt(7),flag5=0;
+        if(i5<chour)
+          flag5=1;  
+        
+        PreparedStatement ps4 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
+        ps4.setInt(1,chour); 
+         ResultSet re4 = ps4.executeQuery(); 
+        break;
+              case "Swing motor oil 500"  : 
+      PreparedStatement pst6 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+        pst6.setString(1,vname ); 
+         ResultSet r6 = pst6.executeQuery(); 
+        int i6=r6.getInt(8),flag6=0;
+        if(i6<chour)
+          flag6=1;  
+        
+        PreparedStatement ps9 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
+        ps9.setInt(1,chour); 
+         ResultSet re9 = ps9.executeQuery(); 
+        break;
+        
+                case "Swing bearing   500"  : 
+      PreparedStatement pst7 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+        pst7.setString(1,vname ); 
+         ResultSet r7 = pst7.executeQuery(); 
+        int i7=r7.getInt(9),flag7=0;
+        if(i7<chour)
+          flag7=1; 
+        
+         PreparedStatement ps8 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
+        ps8.setInt(1,chour); 
+         ResultSet re8 = ps8.executeQuery(); 
+        break;
+        case "Nothing"  : 
+                     flag=0;  
+        break;
+      }
       conn.close();
     }
     catch (Exception e)
