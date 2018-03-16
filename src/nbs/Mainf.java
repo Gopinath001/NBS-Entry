@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -353,9 +354,11 @@ public class Mainf extends javax.swing.JFrame {
         String maregular=(String)mregular.getSelectedItem();
         int marate=Integer.parseInt(mrate.getText());
         String mades=mdes.getText();
+        int i = 0;
         int dif=chour-shour;
         int ea=dif*rent;
         int tot=(ea-(dquant*drate))-marate;
+       String flag=null;
         String day="",ni8="";
         if(dayy.isSelected())
             day="Day";
@@ -446,112 +449,183 @@ public class Mainf extends javax.swing.JFrame {
 
       // execute the preparedstatement
       preparedStmt.execute();
+      System.out.println(maregular);
+      try{
+      String s1="SELECT * FROM v1 WHERE  vn=? ";
+      String f=",",e=",",h=",",a=",",d=",",t=",",s=",",b = ",";int z=0;
+        PreparedStatement p = conn.prepareStatement(s1);
+        p.setString(1,vname ); 
+        ResultSet rq = p.executeQuery(); 
+        while(rq.next()){
+            if(maregular=="Nothing"){
+        if(chour>rq.getInt(2))
+        { z=1;f="Engine oil";}
+        if(chour>rq.getInt(3))
+        { e="Hydraulic oil";z=1;}
+        if(chour>rq.getInt(4))
+        {h="Hydraulic strainer";z=1;}
+        if(chour>rq.getInt(5)) 
+        {            a="Air filter";z=1;}        
+        if(chour>rq.getInt(6))   
+        {d="Diesel filter"; z=1;}  
+        if(chour>rq.getInt(7)) 
+        {t="Track motor oil";  z=1;} 
+        if(chour>rq.getInt(8))
+        {s="Swing motor oil";z=1;}
+        if(chour>rq.getInt(9))
+        {b="Swing bearing";z=1;}
+       
+            }
+        }
+         if(z==1)
+      {
+            JOptionPane.showMessageDialog(null,"Your\t "+ f+","+e+","+h+","+a+","+d+","+ t+","+s+","+b+" \tchange is expire");
+      }
+      }catch (Exception e)
+    {
+      System.err.println("Got an exception!");
+      System.err.println(e.getMessage());
+    }
+     
+     
+      
+      try{
       switch(maregular)
       {
-          case "Engine oil 250"  : 
-      PreparedStatement pst = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+          case "Engine oil 	        250"  : 
+              String s="SELECT * FROM v1 WHERE  vn=? ";
+        PreparedStatement pst = conn.prepareStatement(s);
         pst.setString(1,vname ); 
         ResultSet r = pst.executeQuery(); 
-        int i=r.getInt(2),flag=0;
-        if(i<chour)
-          flag=1;  
-       
-          PreparedStatement p = conn.prepareStatement("insert into v1  (en) values (?) ");
-        p.setInt(1,chour); 
-         ResultSet r2 = p.executeQuery();
+        while(r.next())
+        i=r.getInt(2);
+            
+                if(i<=chour)
+          flag="Engine oil";  
+        System.out.print(flag);
+        String ss="update v1 set en = ? where vn = ?";
+         PreparedStatement p22 = conn.prepareStatement(ss);
+          chour=chour+250;
+         p22.setInt(1,chour); 
+           p22.setString(2,vname);
+          p22.executeUpdate();
         break;
-       case "Hydraulic oil 1000"  : 
+       case "Hydraulic oil	        1000" : 
       PreparedStatement pst1 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
         pst1.setString(1,vname ); 
          ResultSet r1 = pst1.executeQuery(); 
-        int i1=r1.getInt(3),flag1=0;
-        if(i1<chour)
-          flag1=1; 
-         PreparedStatement p2 = conn.prepareStatement("REPLACE INTO v1(vn,hyo)\n" +
-"VALUES(?,?); ");
-         p2.setString(1,vname);
-        p2.setInt(2,chour); 
-         ResultSet rr = p2.executeQuery();
-        break;
+        while(r1.next())
+        i=r1.getInt(3);
+        if(i<=chour)
+          flag="Hydraulic oil 1000"; 
+         PreparedStatement p2 = conn.prepareStatement("update v1 set hyo = ? where vn = ?");
+           chour=chour+1000;
+         p2.setString(2,vname);
+           p2.setInt(1,chour); 
+          p2.executeUpdate();
          case "Hydraulic strainer  250"  : 
       PreparedStatement pst2 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
         pst2.setString(1,vname ); 
-         ResultSet r2 = pst2.executeQuery(); 
-        int i2=r2.getInt(4),flag2=0;
-        if(i2<chour)
-          flag2=1; 
+         ResultSet rr2r = pst2.executeQuery(); 
+       while(rr2r.next())
+        i=rr2r.getInt(4);
+        if(i<=chour)
+          flag="Hydraulic strainer  250"; 
         
-        PreparedStatement ps1 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
-        ps1.setInt(1,chour); 
-         ResultSet re1 = ps1.executeQuery(); 
+             PreparedStatement p2p = conn.prepareStatement("update v1 set hys = ? where vn = ?");
+         p2p.setString(2,vname);
+         chour=chour+250;
+        p2p.setInt(1,chour); 
+       p2p.executeUpdate();
+       
         break;
-          case "Air filter 250"  : 
+          case"Air filter                 250": 
       PreparedStatement pst3 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
         pst3.setString(1,vname ); 
          ResultSet r3 = pst3.executeQuery(); 
-        int i3=r3.getInt(5),flag3=0;
-        if(i3<chour)
-          flag3=1; 
+       while(r3.next())
+        i=r3.getInt(5);
+        if(i<=chour)
+          flag="Air filter 250"; 
         
-        PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
-        ps2.setInt(1,chour); 
-         ResultSet re2 = ps2.executeQuery(); 
+             PreparedStatement p2a = conn.prepareStatement("update v1 set af = ? where vn = ?");
+         p2a.setString(2,vname);
+         chour=chour+250;
+        p2a.setInt(1,chour); 
+        p2a.executeUpdate();
         break;
-              case "Diesel filter 250"  : 
+              case "Diesel filter	         250" : 
       PreparedStatement pst4 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
         pst4.setString(1,vname ); 
          ResultSet r4 = pst4.executeQuery(); 
-        int i4=r4.getInt(6),flag4=0;
-        if(i4<chour)
-          flag4=1;  
+         while(r4.next())
+        i=r4.getInt(6);
+        if(i<=chour)
+          flag="Diesel filter 250";  
         
-        PreparedStatement ps3 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
-        ps3.setInt(1,chour); 
-         ResultSet re = ps3.executeQuery(); 
+              PreparedStatement p2z = conn.prepareStatement("update v1 set df = ? where vn = ?");
+         p2z.setString(2,vname);
+          chour=chour+250;
+        p2z.setInt(1,chour); 
+        p2z.executeUpdate();
         break;
         
-              case "Track motor oil 1000"  : 
+              case"Track motor oil       1000"  : 
       PreparedStatement pst5 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
         pst5.setString(1,vname ); 
          ResultSet r5 = pst5.executeQuery(); 
-        int i5=r5.getInt(7),flag5=0;
-        if(i5<chour)
-          flag5=1;  
+        while(r5.next())
+        i=r5.getInt(7);
+        if(i<=chour)
+          flag="Track motor oil 1000";  
         
-        PreparedStatement ps4 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
-        ps4.setInt(1,chour); 
-         ResultSet re4 = ps4.executeQuery(); 
-        break;
-              case "Swing motor oil 500"  : 
+                   PreparedStatement p2b = conn.prepareStatement("update v1 set tm = ? where vn = ?");
+         p2b.setString(2,vname);
+          chour=chour+1000;
+        p2b.setInt(1,chour); 
+         p2b.executeUpdate();
+              case "Swing motor oil       500" : 
       PreparedStatement pst6 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
         pst6.setString(1,vname ); 
          ResultSet r6 = pst6.executeQuery(); 
-        int i6=r6.getInt(8),flag6=0;
-        if(i6<chour)
-          flag6=1;  
+          while(r6.next())
+        i=r6.getInt(8);
+        if(i<=chour)
+          flag="Swing motor oil 500";  
         
-        PreparedStatement ps9 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
-        ps9.setInt(1,chour); 
-         ResultSet re9 = ps9.executeQuery(); 
-        break;
+                    PreparedStatement p2q = conn.prepareStatement("update v1 set sm = ? where vn = ?");
+         p2q.setString(2,vname);
+          chour=chour+500;
+        p2q.setInt(1,chour); 
+     p2q.executeUpdate();
         
-                case "Swing bearing   500"  : 
+                case "Swing bearing         500"  : 
       PreparedStatement pst7 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
         pst7.setString(1,vname ); 
          ResultSet r7 = pst7.executeQuery(); 
-        int i7=r7.getInt(9),flag7=0;
-        if(i7<chour)
-          flag7=1; 
-        
-         PreparedStatement ps8 = conn.prepareStatement("SELECT * FROM v1 WHERE  en=? ");
-        ps8.setInt(1,chour); 
-         ResultSet re8 = ps8.executeQuery(); 
-        break;
+         while(r7.next())
+        i=r7.getInt(9);
+        if(i<=chour)
+          flag="Swing bearing   500" ; 
+         chour=chour+500;
+          PreparedStatement p2v = conn.prepareStatement("update v1 set sb = ? where vn = ?");
+         p2v.setString(2,vname);
+         p2v.setInt(1,chour); 
+         p2v.executeUpdate();
         case "Nothing"  : 
-                     flag=0;  
+                    System.out.print("switch done");
         break;
       }
       conn.close();
+      if(flag!=null)
+      {
+            JOptionPane.showMessageDialog(null,"Your excavator \t"+vname+" \t"+flag+"\t next change is  :\t"+chour+" Hr");
+      }
+      }catch (Exception e)
+    {
+      System.err.println("Got an exception!");
+      System.err.println(e.getMessage());
+    }
     }
     catch (Exception e)
     {
