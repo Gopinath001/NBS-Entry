@@ -5,9 +5,28 @@
  */
 package nbs;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -32,47 +51,14 @@ public class Analysis extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        th = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        tdr = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        dq = new javax.swing.JTextField();
-        vt = new javax.swing.JComboBox<>();
         sdd = new org.jdesktop.swingx.JXDatePicker();
         edd = new org.jdesktop.swingx.JXDatePicker();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         an = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
-        jLabel1.setText("Month");
-
-        jLabel2.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
-        jLabel2.setText("vehicle");
-
-        jLabel3.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
-        jLabel3.setText("Total hour");
-
-        jLabel4.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
-        jLabel4.setText("Maintance");
-
-        jLabel5.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
-        jLabel5.setText("Diesel  quantity");
-
-        vt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V1", "V2", "V3", "V4" }));
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
-        jLabel6.setText("Efficiency");
+        jLabel1.setText("Range");
 
         an.setText("submit");
         an.addActionListener(new java.awt.event.ActionListener() {
@@ -85,88 +71,156 @@ public class Analysis extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(338, Short.MAX_VALUE)
+                .addComponent(an, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(164, 164, 164))
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5))
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(th)
-                    .addComponent(tdr)
-                    .addComponent(dq)
-                    .addComponent(jTextField1))
-                .addGap(81, 81, 81)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(edd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(an, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(51, 51, 51)))
-                .addGap(150, 150, 150))
+                    .addComponent(sdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(sdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(vt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(th, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tdr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(dq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addComponent(an)
-                .addContainerGap(59, Short.MAX_VALUE))
+                    .addComponent(sdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(edd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116)
+                .addComponent(an, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void anActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anActionPerformed
-        // TODO add your handling code here:
-        //starting date
-        Date oDate= sdd.getDate();        
-        DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String sdd = sdf.format(oDate);
-        //ending date
-        Date ioDate = edd.getDate();        
-        DateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-        String edd = sdf1.format(ioDate);
-        String vname=(String)vt.getSelectedItem();
-        int thour=Integer.parseInt(th.getText());
-        //thour is total hour ruunned
-        int tdieselrate=Integer.parseInt(tdr.getText());
-        //tdr is total diesel rate
-        int dquantity=Integer.parseInt(dq.getText());
-        //tq is diesel quantity
+        try {                                   
+            // TODO add your handling code here:
+            //starting date
+            Date oDate= sdd.getDate();
+            DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String sd = sdf.format(oDate);
+            //ending date
+            Date ioDate = edd.getDate();
+            DateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+            String ed = sdf1.format(ioDate);
+           /* String vname=(String)vt.getSelectedItem();
+            int thour=Integer.parseInt(th.getText());
+            //thour is total hour ruunned
+            int tdieselrate=Integer.parseInt(tdr.getText());
+            //tdr is total diesel rate
+            int dquantity=Integer.parseInt(dq.getText());*/
+            int v1r = 0,v2r=0,v3r=0,v4r=0,v1d =0, v2d =0, v3d=0,v4d=0,v1e=0,v2e=0,v3e=0,v4e=0,v1m = 0,v2m = 0,v4m=0,v3m=0;
+            
+            //tq is diesel quantity
+           final String v1 = "V1";
+      final String v2 = "V2";
+      final String v3 = "V3";
+      final String v4 = "V4";      
+      final String rh = "Running Hour";
+      final String  er= "Earning";
+      final String dq = "Diesel Quantity";
+      final String mi = "Maintance";
+      //database connection 
+      
+      Class.forName("com.mysql.jdbc.Driver");
+     
+      Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
+      //PreparedStatement pst1 = con.prepareStatement("SELECT * FROM hit ORDER BY Date");
+      //pst1.executeQuery(); 
+       PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE Date BETWEEN ? AND ?");
+        pst.setString(1,sd ); 
+        pst.setString(2, ed);
+        
+        ResultSet  r = pst.executeQuery(); 
+       while(r.next()) {
+           if("v1".equals(r.getString(2)) )
+           {           
+              v1r= v1r+r.getInt(7)*1000; 
+               v1d=v1d+(r.getInt(8)*r.getInt(9)); 
+               v1e=v1e+r.getInt(10);
+               v1m=v1m+ r.getInt(12)*10; 
+           }
+           if("v2".equals(r.getString(2)) )
+           {           
+              v2r= v2r+r.getInt(7)*1000; 
+               v2d=v2d+(r.getInt(8)*r.getInt(9)); 
+               v2e=v2e+r.getInt(10);
+               v2m=v2m+ r.getInt(12)*10;}
+           if("v3".equals(r.getString(2)) )
+           {           
+              v3r= v3r+r.getInt(7)*1000; 
+               v3d=v3d+(r.getInt(8)*r.getInt(9)); 
+               v3e=v3e+r.getInt(10);
+               v3m=v3m+ r.getInt(12)*10;  }
+             if("v4".equals(r.getString(2)) )
+           {           
+              v4r= v4r+r.getInt(7)*1000; 
+               v4d=v4d+(r.getInt(8)*r.getInt(9)); 
+               v4e=v4e+r.getInt(10);
+               v4m=v4m+ r.getInt(12)*10;  }
+                        
+                        
+                
+                
+            }
+      
+      final DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
+      dataset.addValue( v1r, v1 , rh );
+      dataset.addValue( v1m , v1 , mi );
+      dataset.addValue( v1e , v1 ,er);
+      dataset.addValue( v1d , v1 , dq );
+
+     dataset.addValue( v2r , v2 , rh );
+      dataset.addValue( v2m , v2 , mi );
+      dataset.addValue( v2e , v2 , er);
+      dataset.addValue( v2d , v2 , dq );
+
+      dataset.addValue( v3r , v3 , rh );
+      dataset.addValue( v3m , v3 , mi );
+      dataset.addValue( v3e , v3 , er );
+      dataset.addValue( v3d , v3 , dq );
+      
+      dataset.addValue(  v4r, v4 , rh );
+      dataset.addValue( v4m , v4 , mi );
+      dataset.addValue( v4e , v4 , er );
+      dataset.addValue( v4d , v4 , dq );
+       System.out.print(v4d+"--"+v1d);
+      JFreeChart barChart = ChartFactory.createBarChart(
+         "Excavators USAGE STATISTICS", 
+         "Category", "Score", 
+         dataset,PlotOrientation.VERTICAL, 
+         true, true, false);
+      try{
+         CategoryPlot p=(CategoryPlot)barChart.getPlot();
+         ChartFrame f=new  ChartFrame("Excavators USAGE STATISTICS",barChart);
+         f.setVisible(true);
+         f.setSize(600,700);
+      }catch (Exception e)
+    {
+      System.err.println("Got an exception!");
+      System.err.println(e.getMessage());
+    }
+      int width = 640;    /* Width of the image */
+      int height = 480;   /* Height of the image */ 
+      File BarChart = new File( "BarChart.jpeg" ); 
+      ChartUtilities.saveChartAsJPEG( BarChart , barChart , width , height );
+   }    catch (IOException ex) {
+            Logger.getLogger(Analysis.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Analysis.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Analysis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         
     }//GEN-LAST:event_anActionPerformed
 
@@ -207,18 +261,8 @@ public class Analysis extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton an;
-    private javax.swing.JTextField dq;
     private org.jdesktop.swingx.JXDatePicker edd;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
     private org.jdesktop.swingx.JXDatePicker sdd;
-    private javax.swing.JTextField tdr;
-    private javax.swing.JTextField th;
-    private javax.swing.JComboBox<String> vt;
     // End of variables declaration//GEN-END:variables
 }
