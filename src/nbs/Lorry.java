@@ -70,6 +70,7 @@ public class Lorry extends javax.swing.JFrame {
         lorry = new javax.swing.JComboBox<>();
         ma = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,11 +165,26 @@ public class Lorry extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Exit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(12, 12, 12))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aaa)
@@ -191,18 +207,14 @@ public class Lorry extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jButton2))
+                    .addComponent(jLabel12))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lother, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                     .addComponent(nol)
                     .addComponent(lds)
                     .addComponent(ldq)
-                    .addComponent(lre)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lre))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -232,29 +244,31 @@ public class Lorry extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(lre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addContainerGap(105, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(aaa)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
                                 .addComponent(lother, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(nol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                        .addGap(36, 36, 36))))
+                        .addComponent(nol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
 
         pack();
@@ -384,23 +398,24 @@ public class Lorry extends javax.swing.JFrame {
       java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
       // the mysql insert statement
-      String query = " insert into lor (Date,Skm,Ckm,Rent,drate,dquant,mrate,other,no,total,milage,MDes)"
-        + " values (?, ?, ?,?,?,?,?,?,?,?,?,?)";
+      String query = " insert into lor (Date,Lname,Skm,Ckm,Rent,drate,dquant,mrate,other,no,total,milage,MDes)"
+        + " values (?,?, ?, ?,?,?,?,?,?,?,?,?,?)";
 
       // create the mysql insert preparedstatement
       PreparedStatement preparedStmt = conn.prepareStatement(query);
           preparedStmt.setString(1,ldate);
-          preparedStmt.setInt(2, skm);
-          preparedStmt.setInt(3, ckm);
-          preparedStmt.setInt(4, rent);
-          preparedStmt.setInt(5, drate);
-          preparedStmt.setInt(6, dquant);
-          preparedStmt.setInt(7, marate);
-          preparedStmt.setInt(8,  other);
-          preparedStmt.setInt(9,no);
-          preparedStmt.setInt(10, tot);
-          preparedStmt.setInt(11, m);
-          preparedStmt.setString(12, mades);
+          preparedStmt.setString(2,lname);
+          preparedStmt.setInt(3, skm);
+          preparedStmt.setInt(4, ckm);
+          preparedStmt.setInt(5, rent);
+          preparedStmt.setInt(6, drate);
+          preparedStmt.setInt(7, dquant);
+          preparedStmt.setInt(8, marate);
+          preparedStmt.setInt(9,  other);
+          preparedStmt.setInt(10,no);
+          preparedStmt.setInt(11, tot);
+          preparedStmt.setInt(12, m);
+          preparedStmt.setString(13, mades);
 
       // execute the preparedstatement
       preparedStmt.execute();
@@ -418,7 +433,7 @@ public class Lorry extends javax.swing.JFrame {
         setVisible(false);
         
         
-       exit(0);
+     
                                          
                                     
 
@@ -430,6 +445,12 @@ public class Lorry extends javax.swing.JFrame {
         main.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         setVisible(false);
+         exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -472,6 +493,7 @@ public class Lorry extends javax.swing.JFrame {
     private javax.swing.JTextField clkm;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

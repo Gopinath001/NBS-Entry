@@ -54,6 +54,7 @@ public class Analysis extends javax.swing.JFrame {
         sdd = new org.jdesktop.swingx.JXDatePicker();
         edd = new org.jdesktop.swingx.JXDatePicker();
         an = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,14 +68,23 @@ public class Analysis extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(338, Short.MAX_VALUE)
+                .addContainerGap(356, Short.MAX_VALUE)
                 .addComponent(an, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(164, 164, 164))
+                .addGap(50, 50, 50)
+                .addComponent(jButton1)
+                .addGap(41, 41, 41))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,7 +104,9 @@ public class Analysis extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(edd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116)
-                .addComponent(an, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(an, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
@@ -102,118 +114,114 @@ public class Analysis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anActionPerformed
-        try {                                   
+        try {
             // TODO add your handling code here:
             //starting date
-            Date oDate= sdd.getDate();
+            Date oDate = sdd.getDate();
             DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             String sd = sdf.format(oDate);
             //ending date
             Date ioDate = edd.getDate();
             DateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
             String ed = sdf1.format(ioDate);
-           /* String vname=(String)vt.getSelectedItem();
+            /* String vname=(String)vt.getSelectedItem();
             int thour=Integer.parseInt(th.getText());
             //thour is total hour ruunned
             int tdieselrate=Integer.parseInt(tdr.getText());
             //tdr is total diesel rate
             int dquantity=Integer.parseInt(dq.getText());*/
-            int v1r = 0,v2r=0,v3r=0,v4r=0,v1d =0, v2d =0, v3d=0,v4d=0,v1e=0,v2e=0,v3e=0,v4e=0,v1m = 0,v2m = 0,v4m=0,v3m=0;
-            
+            int v1r = 0, v2r = 0, v3r = 0, v4r = 0, v1d = 0, v2d = 0, v3d = 0, v4d = 0, v1e = 0, v2e = 0, v3e = 0, v4e = 0, v1m = 0, v2m = 0, v4m = 0, v3m = 0;
+
             //tq is diesel quantity
-           final String v1 = "V1";
-      final String v2 = "V2";
-      final String v3 = "V3";
-      final String v4 = "V4";      
-      final String rh = "Running Hour";
-      final String  er= "Earning";
-      final String dq = "Diesel Quantity";
-      final String mi = "Maintance";
-      //database connection 
-      
-      Class.forName("com.mysql.jdbc.Driver");
-     
-      Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
-      //PreparedStatement pst1 = con.prepareStatement("SELECT * FROM hit ORDER BY Date");
-      //pst1.executeQuery(); 
-       PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE Date BETWEEN ? AND ?");
-        pst.setString(1,sd ); 
-        pst.setString(2, ed);
-        
-        ResultSet  r = pst.executeQuery(); 
-       while(r.next()) {
-           if("v1".equals(r.getString(2)) )
-           {           
-              v1r= v1r+r.getInt(7)*1000; 
-               v1d=v1d+(r.getInt(8)*r.getInt(9)); 
-               v1e=v1e+r.getInt(10);
-               v1m=v1m+ r.getInt(12)*10; 
-           }
-           if("v2".equals(r.getString(2)) )
-           {           
-              v2r= v2r+r.getInt(7)*1000; 
-               v2d=v2d+(r.getInt(8)*r.getInt(9)); 
-               v2e=v2e+r.getInt(10);
-               v2m=v2m+ r.getInt(12)*10;}
-           if("v3".equals(r.getString(2)) )
-           {           
-              v3r= v3r+r.getInt(7)*1000; 
-               v3d=v3d+(r.getInt(8)*r.getInt(9)); 
-               v3e=v3e+r.getInt(10);
-               v3m=v3m+ r.getInt(12)*10;  }
-             if("v4".equals(r.getString(2)) )
-           {           
-              v4r= v4r+r.getInt(7)*1000; 
-               v4d=v4d+(r.getInt(8)*r.getInt(9)); 
-               v4e=v4e+r.getInt(10);
-               v4m=v4m+ r.getInt(12)*10;  }
-                        
-                        
-                
-                
+            final String v1 = "V1";
+            final String v2 = "V2";
+            final String v3 = "V3";
+            final String v4 = "V4";
+            final String rh = "Running Hour";
+            final String er = "Earning";
+            final String dq = "Diesel Quantity";
+            final String mi = "Maintance";
+            //database connection 
+
+            Class.forName("com.mysql.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
+          
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE Date BETWEEN ? AND ?");
+            pst.setString(1, sd);
+            pst.setString(2, ed);
+
+            ResultSet r = pst.executeQuery();
+            while (r.next()) {
+                if ("v1".equals(r.getString(2))) {
+                    v1r = v1r + r.getInt(7) * 1000;
+                    v1d = v1d + (r.getInt(8) * r.getInt(9));
+                    v1e = v1e + r.getInt(10);
+                    v1m = v1m + r.getInt(12) * 10;
+                }
+                if ("v2".equals(r.getString(2))) {
+                    v2r = v2r + r.getInt(7) * 1000;
+                    v2d = v2d + (r.getInt(8) * r.getInt(9));
+                    v2e = v2e + r.getInt(10);
+                    v2m = v2m + r.getInt(12) * 10;
+                }
+                if ("v3".equals(r.getString(2))) {
+                    v3r = v3r + r.getInt(7) * 1000;
+                    v3d = v3d + (r.getInt(8) * r.getInt(9));
+                    v3e = v3e + r.getInt(10);
+                    v3m = v3m + r.getInt(12) * 10;
+                }
+                if ("v4".equals(r.getString(2))) {
+                    v4r = v4r + r.getInt(7) * 1000;
+                    v4d = v4d + (r.getInt(8) * r.getInt(9));
+                    v4e = v4e + r.getInt(10);
+                    v4m = v4m + r.getInt(12) * 10;
+                }
+
             }
-      
-      final DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
-      dataset.addValue( v1r, v1 , rh );
-      dataset.addValue( v1m , v1 , mi );
-      dataset.addValue( v1e , v1 ,er);
-      dataset.addValue( v1d , v1 , dq );
 
-     dataset.addValue( v2r , v2 , rh );
-      dataset.addValue( v2m , v2 , mi );
-      dataset.addValue( v2e , v2 , er);
-      dataset.addValue( v2d , v2 , dq );
+            final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            dataset.addValue(v1r, v1, rh);
+            dataset.addValue(v1m, v1, mi);
+            dataset.addValue(v1e, v1, er);
+            dataset.addValue(v1d, v1, dq);
 
-      dataset.addValue( v3r , v3 , rh );
-      dataset.addValue( v3m , v3 , mi );
-      dataset.addValue( v3e , v3 , er );
-      dataset.addValue( v3d , v3 , dq );
-      
-      dataset.addValue(  v4r, v4 , rh );
-      dataset.addValue( v4m , v4 , mi );
-      dataset.addValue( v4e , v4 , er );
-      dataset.addValue( v4d , v4 , dq );
-       System.out.print(v4d+"--"+v1d);
-      JFreeChart barChart = ChartFactory.createBarChart(
-         "Excavators USAGE STATISTICS", 
-         "Category", "Score", 
-         dataset,PlotOrientation.VERTICAL, 
-         true, true, false);
-      try{
-         CategoryPlot p=(CategoryPlot)barChart.getPlot();
-         ChartFrame f=new  ChartFrame("Excavators USAGE STATISTICS",barChart);
-         f.setVisible(true);
-         f.setSize(600,700);
-      }catch (Exception e)
-    {
-      System.err.println("Got an exception!");
-      System.err.println(e.getMessage());
-    }
-      int width = 640;    /* Width of the image */
-      int height = 480;   /* Height of the image */ 
-      File BarChart = new File( "BarChart.jpeg" ); 
-      ChartUtilities.saveChartAsJPEG( BarChart , barChart , width , height );
-   }    catch (IOException ex) {
+            dataset.addValue(v2r, v2, rh);
+            dataset.addValue(v2m, v2, mi);
+            dataset.addValue(v2e, v2, er);
+            dataset.addValue(v2d, v2, dq);
+
+            dataset.addValue(v3r, v3, rh);
+            dataset.addValue(v3m, v3, mi);
+            dataset.addValue(v3e, v3, er);
+            dataset.addValue(v3d, v3, dq);
+
+            dataset.addValue(v4r, v4, rh);
+            dataset.addValue(v4m, v4, mi);
+            dataset.addValue(v4e, v4, er);
+            dataset.addValue(v4d, v4, dq);
+            System.out.print(v4d + "--" + v1d);
+            JFreeChart barChart = ChartFactory.createBarChart(
+                    "Excavators USAGE STATISTICS",
+                    "Category", "Score",
+                    dataset, PlotOrientation.VERTICAL,
+                    true, true, false);
+            try {
+                CategoryPlot p = (CategoryPlot) barChart.getPlot();
+                ChartFrame f = new ChartFrame("Excavators USAGE STATISTICS", barChart);
+                f.setVisible(true);
+                f.setSize(600, 700);
+            } catch (Exception e) {
+                System.err.println("Got an exception!");
+                System.err.println(e.getMessage());
+            }
+            int width = 640;
+            /* Width of the image */
+            int height = 480;
+            /* Height of the image */
+            File BarChart = new File("BarChart.jpeg");
+            ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
+        } catch (IOException ex) {
             Logger.getLogger(Analysis.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Analysis.class.getName()).log(Level.SEVERE, null, ex);
@@ -221,8 +229,15 @@ public class Analysis extends javax.swing.JFrame {
             Logger.getLogger(Analysis.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
+
     }//GEN-LAST:event_anActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+          Start main = new Start();
+        main.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +277,7 @@ public class Analysis extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton an;
     private org.jdesktop.swingx.JXDatePicker edd;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private org.jdesktop.swingx.JXDatePicker sdd;
     // End of variables declaration//GEN-END:variables

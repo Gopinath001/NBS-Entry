@@ -292,145 +292,134 @@ public class Monthlyreport extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          DefaultTableModel model;
+        DefaultTableModel model;
         model = (DefaultTableModel) table.getModel();
-         while(model.getRowCount()>0)
-            model.removeRow(model.getRowCount()-1);
-         String vna=(String)vn.getSelectedItem();
-         
-         int z = 0;
-         if(m.isSelected())
-            z=1;
-        if(r.isSelected())
-            z=2;
-        
-        
-        switch(z)
-        {
-            case 1:Date edate = month.getDate();
-        DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String da=sdf.format(edate);
-                  
-                
-                 ResultSet resultSet = null;
- 
-     try{  
-Class.forName("com.mysql.jdbc.Driver");  
-    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test","root","")) {
-        //here test is database name, root is username
-    PreparedStatement pst = con.prepareStatement("Select * from hit where Date=? and vn=?");
-       pst.setString(1, da); 
-       pst.setString(2, vna);
-       resultSet  = pst.executeQuery(); 
-       
-       ResultSetMetaData md = resultSet.getMetaData();
-       int colnum = md.getColumnCount();
-       String Row[];
-       int flag=0;
-            String Check="";
-            Row = new String[colnum];
-            while(resultSet.next()){
-                for(int i=1;i<=colnum;i++){
-                    if(i==colnum)
-                    {
-                         if(resultSet.getString(i)==null)
-                        {
-                            Row[i-1]="Not Issued";
-                            model.addRow(Row);
+        while (model.getRowCount() > 0) {
+            model.removeRow(model.getRowCount() - 1);
+        }
+        String vna = (String) vn.getSelectedItem();
+
+        int z = 0;
+        if (m.isSelected()) {
+            z = 1;
+        }
+        if (r.isSelected()) {
+            z = 2;
+        }
+
+        switch (z) {
+            case 1:
+                Date edate = month.getDate();
+                DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String da = sdf.format(edate);
+
+                ResultSet resultSet = null;
+
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
+                        //here test is database name, root is username
+                        PreparedStatement pst = con.prepareStatement("Select * from hit where Date=? and vn=?");
+                        pst.setString(1, da);
+                        pst.setString(2, vna);
+                        resultSet = pst.executeQuery();
+
+                        ResultSetMetaData md = resultSet.getMetaData();
+                        int colnum = md.getColumnCount();
+                        String Row[];
+                        int flag = 0;
+                        String Check = "";
+                        Row = new String[colnum];
+                        while (resultSet.next()) {
+                            for (int i = 1; i <= colnum; i++) {
+                                if (i == colnum) {
+                                    if (resultSet.getString(i) == null) {
+                                        Row[i - 1] = "Not Issued";
+                                        model.addRow(Row);
+                                    } else {
+                                        if (flag == 1) {
+                                            continue;
+                                        }
+                                        Row[i - 1] = "Issued";
+                                        model.addRow(Row);
+                                    }
+                                    System.out.println(resultSet.getString(i));
+                                } else {
+                                    Row[i - 1] = resultSet.getString(i);
+                                }
+
+                            }
+
                         }
-                        else
-                        {
-                            if(flag==1)
-                                continue;
-                            Row[i-1]="Issued";
-                            model.addRow(Row);
-                        }
-                        System.out.println(resultSet.getString(i));
+
+                        // processing returned data and printing into console
+                        con.close();
+
+                    } catch (Exception a) {
+                        System.err.println("Got an exception!");
+                        System.err.println(a.getMessage());
                     }
-                  else
-                    Row[i-1]=resultSet.getString(i);
-            
-                    }
-                  
-            }
-   
-          
-                  // processing returned data and printing into console
-            
-            
-             con.close();
-              
-          
-        }  
-         catch (Exception a)
-    {
-      System.err.println("Got an exception!");
-      System.err.println(a.getMessage());
-    } 
-         
-        } catch (Exception e)
-    {
-      System.err.println("Got an exception!");
-      System.err.println(e.getMessage());
-    }break; 
-    
-    //Range selection
-            case 2: 
+
+                } catch (Exception e) {
+                    System.err.println("Got an exception!");
+                    System.err.println(e.getMessage());
+                }
+                break;
+
+            //Range selection
+            case 2:
                 //from date
                 Date fdate = fr.getDate();
-        DateFormat esdf = new SimpleDateFormat("dd-MM-yyyy");
-        String datef =esdf.format(fdate);
-        
-        //to date
-          Date tate = to.getDate();
-        DateFormat asdf = new SimpleDateFormat("dd-MM-yyyy");
-        String datet =asdf.format(tate);
-        try{  
-Class.forName("com.mysql.jdbc.Driver");  
-    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test","root","")) {
-        //here test is database name, root is username
-    PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE (Date BETWEEN ? AND ?)AND vn=?");
-       pst.setString(1,datef ); 
-       pst.setString(2, datet);
-        pst.setString(3,vna );
-       resultSet  = pst.executeQuery(); 
-       ResultSetMetaData md = resultSet.getMetaData();
-       int colnum = md.getColumnCount();
-       String Row[];
-       int flag=0;
-            String Check="";
-            Row = new String[colnum];
-            while(resultSet.next()){
-                for(int i=1;i<=colnum;i++){
-                    if(i==colnum)
-                    {
-                         if(resultSet.getString(i)==null)
-                        {
-                            Row[i-1]="Not Issued";
-                            model.addRow(Row);
+                DateFormat esdf = new SimpleDateFormat("dd-MM-yyyy");
+                String datef = esdf.format(fdate);
+
+                //to date
+                Date tate = to.getDate();
+                DateFormat asdf = new SimpleDateFormat("dd-MM-yyyy");
+                String datet = asdf.format(tate);
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
+                        //here test is database name, root is username
+                        PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE (Date BETWEEN ? AND ?)AND vn=?");
+                        pst.setString(1, datef);
+                        pst.setString(2, datet);
+                        pst.setString(3, vna);
+                        resultSet = pst.executeQuery();
+                        ResultSetMetaData md = resultSet.getMetaData();
+                        int colnum = md.getColumnCount();
+                        String Row[];
+                        int flag = 0;
+                        String Check = "";
+                        Row = new String[colnum];
+                        while (resultSet.next()) {
+                            for (int i = 1; i <= colnum; i++) {
+                                if (i == colnum) {
+                                    if (resultSet.getString(i) == null) {
+                                       
+                                        model.addRow(Row);
+                                    } else {
+                                        if (flag == 1) {
+                                            continue;
+                                        }
+                                       
+                                        model.addRow(Row);
+                                    }
+                                    System.out.println(resultSet.getString(i));
+                                } else {
+                                    Row[i - 1] = resultSet.getString(i);
+                                }
+
+                            }
+
                         }
-                        else
-                        {
-                            if(flag==1)
-                                continue;
-                            Row[i-1]="Issued";
-                            model.addRow(Row);
-                        }
-                        System.out.println(resultSet.getString(i));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Monthlyreport.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                  else
-                    Row[i-1]=resultSet.getString(i);
-            
-                    }
-                  
-            }
-    }         catch (SQLException ex) {
-                  Logger.getLogger(Monthlyreport.class.getName()).log(Level.SEVERE, null, ex);
-              }
-        } catch (ClassNotFoundException ex) {
-              Logger.getLogger(Monthlyreport.class.getName()).log(Level.SEVERE, null, ex);
-          }
-        }   
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Monthlyreport.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -441,166 +430,162 @@ Class.forName("com.mysql.jdbc.Driver");
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-         String vna=(String)vn.getSelectedItem();
-          String toa=add.getText();
+        String vna = (String) vn.getSelectedItem();
+        String toa = add.getText();
         int z = 0;
-        int i=0,j=0;
-         if(m.isSelected())
-            z=1;
-        if(r.isSelected())
-            z=2;
-        if (z==2)
-        {
-             //from date
-                Date fdate = fr.getDate();
-        DateFormat esdf = new SimpleDateFormat("dd-MM-yyyy");
-        String datef =esdf.format(fdate);
-        
-        //to date
-          Date tate = to.getDate();
-        DateFormat asdf = new SimpleDateFormat("dd-MM-yyyy");
-        String datet =asdf.format(tate);
-                 ResultSet resultSet = null,r=null;
- 
-     
-             try {  
-                 Class.forName("com.mysql.jdbc.Driver");
-             } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(Monthlyreport.class.getName()).log(Level.SEVERE, null, ex);
-             }
-     Connection con=null;
-             try {
-                 con = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
-             } catch (SQLException ex) {
-                 Logger.getLogger(Monthlyreport.class.getName()).log(Level.SEVERE, null, ex);
-             }
-        //here test is database name, root is username
-        try{
-    PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE (Date BETWEEN ? AND ?)AND vn=?");
-        pst.setString(1,datef ); 
-       pst.setString(2, datet);
-        pst.setString(3,vna );
-       r = pst.executeQuery(); 
-       while(r.next()) {
-                System.out.println(r.getString(1) + "\t" + 
-                        r.getString(2) + "\t" + 
-                        r.getString(3) + "\t" +
-                         r.getInt(4) + "\t" + 
-                        r.getInt(5) + "\t" +
-                         r.getInt(6) + "\t" + 
-                        r.getInt(7) + "\t" +
-                         r.getInt(8) + "\t" + 
-                        r.getInt(9) + "\t" +
-                         r.getInt(10) + "\t" + 
-                        r.getString(11) + "\t" +
-                         r.getInt(12) + "\t" + 
-                        r.getInt(13) + "\t" +
-                        r.getString(14));
-                
-                i=r.getInt(10)+i;
-                j=r.getInt(7)+j;
-                
-                
+        int i = 0, j = 0;
+        if (m.isSelected()) {
+            z = 1;
+        }
+        if (r.isSelected()) {
+            z = 2;
+        }
+        if (z == 2) {
+            //from date
+            Date fdate = fr.getDate();
+            DateFormat esdf = new SimpleDateFormat("dd-MM-yyyy");
+            String datef = esdf.format(fdate);
+
+            //to date
+            Date tate = to.getDate();
+            DateFormat asdf = new SimpleDateFormat("dd-MM-yyyy");
+            String datet = asdf.format(tate);
+            ResultSet resultSet = null, r = null;
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Monthlyreport.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }catch(Exception a)
-    {
-      System.err.println("Got an exception!");
-      System.err.println(a.getMessage());
-    }  
-        XWPFDocument document = null;
-		FileOutputStream fileOutputStream = null;
-		try {
- 
-			document = new XWPFDocument();
-			File fileToBeCreated = new File("F:/Bill/"+vna+"."+datef+"to"+datet+".docx");
-			fileOutputStream = new FileOutputStream(fileToBeCreated);
-                           
-                        XWPFParagraph paragraph1 = document.createParagraph();
-                        XWPFParagraph paragraph2 = document.createParagraph();
-			paragraph1.setBorderBottom(Borders.BASIC_THIN_LINES);
-                      
-			paragraph1.setAlignment(ParagraphAlignment.CENTER);
-                        XWPFRun run = paragraph1.createRun();
-                        paragraph1 .setWordWrapped(true);
-                        paragraph1.setPageBreak(true);
-                        
-                        run.setColor("830000");
-                        run.setFontSize(16);
-                        run.setBold(true);
-                        run.setTextPosition(10);
-                        
-                       
-                        //paragraph1.setStyle("CUSTOMYNP");
-			run.setText("        N.B.S EARTH MOVERS                                                " );
-			 run.setColor("4b0000");
-                        run.setText("                                54A, Kallarnatham, S.Kulavaippatti& (PO), Alangudi (TK), Pudukkottai-622001. "
-					+ " Monthly bill");
-                         run.addBreak();
-                         
-                          XWPFRun tor = paragraph2.createRun();
-                          paragraph2.setAlignment(ParagraphAlignment.LEFT);
-                          tor.setText("To:"+toa);
-			// Create a Simple Table using the document.
-			XWPFTable table = document.createTable();
- 
-			// Now add Rows and Columns to the Table.
-			// Creating the First Row
-			XWPFTableRow tableRow0 = table.getRow(0);
-			
-			// Creating the First Cell
-			XWPFTableCell tableCell0 = tableRow0.getCell(0);
-			tableCell0.setText(" Si.No.");
-			
-			// Creating the Other Cells for the First Row
-			XWPFTableCell tableCell1 = tableRow0.addNewTableCell();
-			tableCell1.setText(" Particulars");
-                        			XWPFTableCell tableCell2 = tableRow0.addNewTableCell();
-			tableCell2.setText(" Rate");
-                        XWPFTableCell tableCell3 = tableRow0.addNewTableCell();
-			tableCell3.setText(" Amount(Rs.)");
-                         
-			// Creating the Next Rows and Cells
-			XWPFTableRow tableRow1 = table.createRow();
-			tableRow1.getCell(0).setText(" 1. ");
-			tableRow1.getCell(1).setText("Hiring charges of our excavators period from "
-                                + "("+datef+ ".to." +datet+") Total hours -"+j+"Hr" );
-			tableRow1.getCell(2).setText(" 180000 ");
-                        tableRow1.getCell(3).setText(""+i);
-                        
- 
-			document.write(fileOutputStream);
-                        System.out.println("print"+i);
-			System.out.println("Table created in Word File Succefully !!!");
- 
-		} catch (Exception e) {
-			System.out.println("We had an error while creating the Word Doc " + e.getMessage());
-			e.printStackTrace();
-		} finally {
-			try {
-				if (document != null) 
-					document.close();
-				
-				if (fileOutputStream != null) 
-					fileOutputStream.close();
-				
-			} catch (Exception ex) {
-                            System.err.println("Got an exception!");
-                          System.err.println(ex.getMessage());
-			}
-		}
- 
-	
-      
-    }
-          
-    exit(0); 
-        
+            Connection con = null;
+            try {
+                con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
+            } catch (SQLException ex) {
+                Logger.getLogger(Monthlyreport.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //here test is database name, root is username
+            try {
+                PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE (Date BETWEEN ? AND ?)AND vn=?");
+                pst.setString(1, datef);
+                pst.setString(2, datet);
+                pst.setString(3, vna);
+                r = pst.executeQuery();
+                while (r.next()) {
+                    System.out.println(r.getString(1) + "\t"
+                            + r.getString(2) + "\t"
+                            + r.getString(3) + "\t"
+                            + r.getInt(4) + "\t"
+                            + r.getInt(5) + "\t"
+                            + r.getInt(6) + "\t"
+                            + r.getInt(7) + "\t"
+                            + r.getInt(8) + "\t"
+                            + r.getInt(9) + "\t"
+                            + r.getInt(10) + "\t"
+                            + r.getString(11) + "\t"
+                            + r.getInt(12) + "\t"
+                            + r.getInt(13) + "\t"
+                            + r.getString(14));
+
+                    i = r.getInt(10) + i;
+                    j = r.getInt(7) + j;
+
+                }
+            } catch (Exception a) {
+                System.err.println("Got an exception!");
+                System.err.println(a.getMessage());
+            }
+            XWPFDocument document = null;
+            FileOutputStream fileOutputStream = null;
+            try {
+
+                document = new XWPFDocument();
+                File fileToBeCreated = new File("F:/Bill/" + vna + "." + datef + "to" + datet + ".docx");
+                fileOutputStream = new FileOutputStream(fileToBeCreated);
+
+                XWPFParagraph paragraph1 = document.createParagraph();
+                XWPFParagraph paragraph2 = document.createParagraph();
+                paragraph1.setBorderBottom(Borders.BASIC_THIN_LINES);
+
+                paragraph1.setAlignment(ParagraphAlignment.CENTER);
+                XWPFRun run = paragraph1.createRun();
+                paragraph1.setWordWrapped(true);
+                paragraph1.setPageBreak(true);
+
+                run.setColor("830000");
+                run.setFontSize(16);
+                run.setBold(true);
+                run.setTextPosition(10);
+
+                //paragraph1.setStyle("CUSTOMYNP");
+                run.setText("        N.B.S EARTH MOVERS                                                ");
+                run.setColor("4b0000");
+                run.setText("                                54A, Kallarnatham, S.Kulavaippatti& (PO), Alangudi (TK), Pudukkottai-622001. "
+                        + " Monthly bill");
+                run.addBreak();
+
+                XWPFRun tor = paragraph2.createRun();
+                paragraph2.setAlignment(ParagraphAlignment.LEFT);
+                tor.setText("To:" + toa);
+                // Create a Simple Table using the document.
+                XWPFTable table = document.createTable();
+
+                // Now add Rows and Columns to the Table.
+                // Creating the First Row
+                XWPFTableRow tableRow0 = table.getRow(0);
+
+                // Creating the First Cell
+                XWPFTableCell tableCell0 = tableRow0.getCell(0);
+                tableCell0.setText(" Si.No.");
+
+                // Creating the Other Cells for the First Row
+                XWPFTableCell tableCell1 = tableRow0.addNewTableCell();
+                tableCell1.setText(" Particulars");
+                XWPFTableCell tableCell2 = tableRow0.addNewTableCell();
+                tableCell2.setText(" Rate");
+                XWPFTableCell tableCell3 = tableRow0.addNewTableCell();
+                tableCell3.setText(" Amount(Rs.)");
+
+                // Creating the Next Rows and Cells
+                XWPFTableRow tableRow1 = table.createRow();
+                tableRow1.getCell(0).setText(" 1. ");
+                tableRow1.getCell(1).setText("Hiring charges of our excavators period from "
+                        + "(" + datef + ".to." + datet + ") Total hours -" + j + "Hr");
+                tableRow1.getCell(2).setText(" 180000 ");
+                tableRow1.getCell(3).setText("" + i);
+
+                document.write(fileOutputStream);
+                System.out.println("print" + i);
+                System.out.println("Table created in Word File Succefully !!!");
+
+            } catch (Exception e) {
+                System.out.println("We had an error while creating the Word Doc " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (document != null) {
+                        document.close();
+                    }
+
+                    if (fileOutputStream != null) {
+                        fileOutputStream.close();
+                    }
+
+                } catch (Exception ex) {
+                    System.err.println("Got an exception!");
+                    System.err.println(ex.getMessage());
+                }
+            }
+
+        }
+
+        exit(0);
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addActionPerformed
-        
+
     /**
      * @param args the command line arguments
      */

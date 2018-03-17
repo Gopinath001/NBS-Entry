@@ -28,6 +28,7 @@ public class Start extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -35,11 +36,33 @@ public class Start extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setBackground(new java.awt.Color(0, 0, 255));
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(0, 0));
+        setPreferredSize(new java.awt.Dimension(700, 500));
+        setSize(new java.awt.Dimension(500, 500));
+        getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(523, 44, 0, 306);
+
+        jButton5.setFont(new java.awt.Font("Myriad Pro", 1, 14)); // NOI18N
+        jButton5.setText("Lorry report");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5);
+        jButton5.setBounds(230, 140, 120, 30);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/nbs/02-101.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(360, 150, 255, 207);
 
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton1.setText("Hitachi");
@@ -48,6 +71,8 @@ public class Start extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(60, 70, 110, 29);
 
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton2.setText("Monthly Bill");
@@ -56,6 +81,8 @@ public class Start extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(60, 140, 129, 29);
 
         jButton3.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton3.setText("Analysis Report");
@@ -64,6 +91,8 @@ public class Start extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(70, 220, 157, 29);
 
         jButton4.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jButton4.setText("Lorry");
@@ -72,65 +101,23 @@ public class Start extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(jButton2)
-                                .addGap(68, 68, 68)
-                                .addComponent(jButton3)))
-                        .addGap(0, 2, Short.MAX_VALUE)))
-                .addGap(49, 49, 49))
-        );
+        getContentPane().add(jButton4);
+        jButton4.setBounds(240, 70, 66, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- Mainf main = new Mainf();
+        Mainf main = new Mainf();
         main.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+         Analysis main = new Analysis();
+        main.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -142,11 +129,18 @@ public class Start extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-         Monthlyreport main = new  Monthlyreport ();
+
+        Monthlyreport main = new Monthlyreport();
         main.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        lreport main = new lreport();
+        main.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,6 +182,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
