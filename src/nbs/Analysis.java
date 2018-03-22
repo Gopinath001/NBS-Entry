@@ -12,7 +12,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,10 +22,8 @@ import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -55,60 +52,82 @@ public class Analysis extends javax.swing.JFrame {
         edd = new org.jdesktop.swingx.JXDatePicker();
         an = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        vn = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        s = new javax.swing.JCheckBox();
+        m = new javax.swing.JLabel();
+        d = new javax.swing.JLabel();
+        ma = new javax.swing.JLabel();
+        e = new javax.swing.JLabel();
+        ef = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(900, 900));
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel1.setText("Range");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(31, 47, 76, 15);
+        getContentPane().add(sdd);
+        sdd.setBounds(166, 43, 110, 22);
+        getContentPane().add(edd);
+        edd.setBounds(166, 91, 110, 22);
 
-        an.setText("submit");
+        an.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        an.setText("Submit");
         an.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anActionPerformed(evt);
             }
         });
+        getContentPane().add(an);
+        an.setBounds(280, 360, 89, 38);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(445, 360, 80, 38);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(356, Short.MAX_VALUE)
-                .addComponent(an, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jButton1)
-                .addGap(41, 41, 41))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(edd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(sdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(edd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(an, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
+        vn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V1", "V2", "V3", "V4" }));
+        getContentPane().add(vn);
+        vn.setBounds(166, 217, 114, 20);
+
+        jLabel2.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
+        jLabel2.setText("Single report");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(31, 178, 76, 20);
+
+        s.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        s.setText("one vheical");
+        getContentPane().add(s);
+        s.setBounds(166, 177, 120, 23);
+
+        m.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        getContentPane().add(m);
+        m.setBounds(358, 44, 179, 24);
+
+        d.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        getContentPane().add(d);
+        d.setBounds(358, 86, 179, 27);
+
+        ma.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        getContentPane().add(ma);
+        ma.setBounds(358, 131, 179, 26);
+
+        e.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        getContentPane().add(e);
+        e.setBounds(358, 202, 179, 29);
+
+        ef.setFont(new java.awt.Font("Myriad Pro", 1, 14)); // NOI18N
+        getContentPane().add(ef);
+        ef.setBounds(350, 250, 179, 28);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,8 +143,8 @@ public class Analysis extends javax.swing.JFrame {
             Date ioDate = edd.getDate();
             DateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
             String ed = sdf1.format(ioDate);
-            /* String vname=(String)vt.getSelectedItem();
-            int thour=Integer.parseInt(th.getText());
+            String vname = (String) vn.getSelectedItem();
+            /*int thour=Integer.parseInt(th.getText());
             //thour is total hour ruunned
             int tdieselrate=Integer.parseInt(tdr.getText());
             //tdr is total diesel rate
@@ -146,7 +165,39 @@ public class Analysis extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
 
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
-          
+            if (s.isSelected()) {
+                PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE (Date BETWEEN ? AND ?) AND vn=?");
+
+                pst.setString(1, sd);
+                pst.setString(2, ed);
+                pst.setString(3, vname);
+                ResultSet r = pst.executeQuery();
+               float z=0;int c=0;
+                while (r.next())
+                {
+                    v1r = v1r + r.getInt(7);
+                    //desel
+                    z=z+r.getInt(9);
+                    //hr
+                    c=c+r.getInt(7);
+                    v1d = v1d + (r.getInt(8) * r.getInt(9));
+                    v1e = v1e + r.getInt(10);
+                    v1m = v1m + r.getInt(12);
+
+                }
+                   c=c*60;
+                    System.out.println(z+"--"+c);
+                     z=z/c;
+                     z=z*60;
+                    m.setText("Total Running Hours : \t" + v1r);
+                    d.setText("Total Diesel        : \t" + v1d);
+                    ma.setText("Total Maintance    : \t" + v1m);
+                    e.setText("Total Earning Amount: \t" + v1e);
+                    ef.setText("Avg fuel per Hr: \t" + z);
+            }
+            else
+            {
+
             PreparedStatement pst = con.prepareStatement("SELECT * FROM hit WHERE Date BETWEEN ? AND ?");
             pst.setString(1, sd);
             pst.setString(2, ed);
@@ -201,11 +252,13 @@ public class Analysis extends javax.swing.JFrame {
             dataset.addValue(v4e, v4, er);
             dataset.addValue(v4d, v4, dq);
             System.out.print(v4d + "--" + v1d);
+
             JFreeChart barChart = ChartFactory.createBarChart(
                     "Excavators USAGE STATISTICS",
-                    "Category", "Score",
+                 "Vehicle Names", "Amount",
                     dataset, PlotOrientation.VERTICAL,
                     true, true, false);
+
             try {
                 CategoryPlot p = (CategoryPlot) barChart.getPlot();
                 ChartFrame f = new ChartFrame("Excavators USAGE STATISTICS", barChart);
@@ -219,8 +272,9 @@ public class Analysis extends javax.swing.JFrame {
             /* Width of the image */
             int height = 480;
             /* Height of the image */
-            File BarChart = new File("BarChart.jpeg");
+            File BarChart = new File("F:/Bill/" + sd + "to" + ed + ".jpeg");
             ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
+            }
         } catch (IOException ex) {
             Logger.getLogger(Analysis.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -234,7 +288,7 @@ public class Analysis extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          Start main = new Start();
+        Start main = new Start();
         main.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -276,9 +330,17 @@ public class Analysis extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton an;
+    private javax.swing.JLabel d;
+    private javax.swing.JLabel e;
     private org.jdesktop.swingx.JXDatePicker edd;
+    private javax.swing.JLabel ef;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel m;
+    private javax.swing.JLabel ma;
+    private javax.swing.JCheckBox s;
     private org.jdesktop.swingx.JXDatePicker sdd;
+    private javax.swing.JComboBox<String> vn;
     // End of variables declaration//GEN-END:variables
 }

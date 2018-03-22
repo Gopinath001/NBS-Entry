@@ -5,11 +5,8 @@
  */
 package nbs;
 
-import static java.awt.Color.red;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import static java.lang.System.exit;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,13 +17,10 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import static org.apache.poi.hslf.record.RecordTypes.Document;
 import org.apache.poi.xwpf.usermodel.Borders;
-import org.apache.poi.xwpf.usermodel.LineSpacingRule;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -75,11 +69,18 @@ public class Monthlyreport extends javax.swing.JFrame {
         month = new org.jdesktop.swingx.JXDatePicker();
         jLabel2 = new javax.swing.JLabel();
         add = new javax.swing.JTextField();
+        bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(879, 487));
+        getContentPane().setLayout(null);
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(47, 29, 0, 0);
 
         jLabel3.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
-        jLabel3.setText("vehicle name");
+        jLabel3.setText("Vehicle name");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(53, 29, 107, 15);
 
         buttonGroup1.add(m);
         m.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -89,16 +90,28 @@ public class Monthlyreport extends javax.swing.JFrame {
                 mActionPerformed(evt);
             }
         });
+        getContentPane().add(m);
+        m.setBounds(198, 72, 147, 23);
 
         buttonGroup1.add(r);
         r.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         r.setText("range");
+        getContentPane().add(r);
+        r.setBounds(198, 95, 59, 23);
+        getContentPane().add(fr);
+        fr.setBounds(484, 30, 125, 22);
+        getContentPane().add(to);
+        to.setBounds(484, 70, 125, 22);
 
         jLabel5.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel5.setText("Month");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(53, 123, 84, 15);
 
         jLabel6.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel6.setText("Range");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(384, 34, 38, 15);
 
         vn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "v1", "v2", "v3", "v4" }));
         vn.addActionListener(new java.awt.event.ActionListener() {
@@ -106,20 +119,28 @@ public class Monthlyreport extends javax.swing.JFrame {
                 vnActionPerformed(evt);
             }
         });
+        getContentPane().add(vn);
+        vn.setBounds(198, 34, 147, 20);
 
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(632, 119, 90, 30);
 
+        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(491, 119, 90, 30);
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setToolTipText("");
@@ -161,6 +182,7 @@ public class Monthlyreport extends javax.swing.JFrame {
                 "Date", "V.Name", "Shift", "S.Hour", "C.Hour", "Rent", "R.Hour", "D.Rate", "D.Quant", "Earning", "M.Regular", "M.Rate", "Total", "M.Des"
             }
         ));
+        table.setMinimumSize(new java.awt.Dimension(900, 900));
         table.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(table);
         if (table.getColumnModel().getColumnCount() > 0) {
@@ -180,104 +202,35 @@ public class Monthlyreport extends javax.swing.JFrame {
             table.getColumnModel().getColumn(13).setHeaderValue("M.Des");
         }
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 160, 879, 327);
+
+        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         jButton3.setText("Document");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(757, 119, 100, 30);
+        getContentPane().add(month);
+        month.setBounds(198, 120, 110, 22);
 
         jLabel2.setFont(new java.awt.Font("Myriad Pro", 1, 14)); // NOI18N
         jLabel2.setText("To");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(640, 34, 29, 15);
 
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(m, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(vn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(r)
-                            .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel6)
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(to, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fr, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton3)
-                        .addGap(22, 22, 22))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel2)
-                                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(vn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(m)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(r)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
-        );
+        getContentPane().add(add);
+        add.setBounds(687, 31, 128, 20);
+        getContentPane().add(bg);
+        bg.setBounds(0, 0, 880, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -305,6 +258,7 @@ public class Monthlyreport extends javax.swing.JFrame {
         }
         if (r.isSelected()) {
             z = 2;
+            add.setText("anand");
         }
 
         switch (z) {
@@ -623,6 +577,7 @@ public class Monthlyreport extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField add;
+    private javax.swing.JLabel bg;
     private javax.swing.ButtonGroup buttonGroup1;
     private org.jdesktop.swingx.JXDatePicker fr;
     private javax.swing.JButton jButton1;

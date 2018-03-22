@@ -188,7 +188,7 @@ public class Mainf extends javax.swing.JFrame {
             }
         });
         getContentPane().add(aaa);
-        aaa.setBounds(259, 73, 37, 20);
+        aaa.setBounds(259, 73, 50, 20);
 
         da.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +196,7 @@ public class Mainf extends javax.swing.JFrame {
             }
         });
         getContentPane().add(da);
-        da.setBounds(258, 140, 108, 22);
+        da.setBounds(258, 140, 110, 22);
 
         mregular.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nothing", "Engine oil \t        250", "Hydraulic oil\t        1000", "Hydraulic strainer  250", "Air filter                 250", "Diesel filter\t         250", "Track motor oil       1000", "Swing motor oil       500", "Swing bearing         500" }));
         mregular.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +230,7 @@ public class Mainf extends javax.swing.JFrame {
         getContentPane().add(jLabel13);
         jLabel13.setBounds(622, 183, 77, 17);
         getContentPane().add(mdes);
-        mdes.setBounds(783, 182, 194, 20);
+        mdes.setBounds(780, 180, 194, 20);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Back");
@@ -240,7 +240,7 @@ public class Mainf extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(650, 400, 55, 35);
+        jButton2.setBounds(625, 400, 80, 35);
 
         jButton3.setText("Exit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -619,7 +619,7 @@ public class Mainf extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
          setVisible(false);
-         exit(0);
+         System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

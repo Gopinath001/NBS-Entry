@@ -73,51 +73,78 @@ public class Lorry extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(700, 520));
+        setPreferredSize(new java.awt.Dimension(700, 520));
+        getContentPane().setLayout(null);
 
         aaa.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         aaa.setText("Lorry");
+        getContentPane().add(aaa);
+        aaa.setBounds(53, 23, 32, 15);
 
         bbbb.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         bbbb.setText("Date");
+        getContentPane().add(bbbb);
+        bbbb.setBounds(53, 65, 29, 15);
 
         vvvv.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         vvvv.setText("Starting KM");
+        getContentPane().add(vvvv);
+        vvvv.setBounds(53, 104, 71, 15);
 
         sakm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sakmActionPerformed(evt);
             }
         });
+        getContentPane().add(sakm);
+        sakm.setBounds(209, 101, 114, 20);
 
         vvvvdd.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         vvvvdd.setText("Closing KM ");
+        getContentPane().add(vvvvdd);
+        vvvvdd.setBounds(53, 145, 69, 15);
 
         clkm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clkmActionPerformed(evt);
             }
         });
+        getContentPane().add(clkm);
+        clkm.setBounds(209, 142, 114, 20);
+        getContentPane().add(ldate);
+        ldate.setBounds(209, 61, 110, 22);
 
         jLabel6.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel6.setText("Maintance Rate");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(53, 222, 96, 15);
 
         jLabel7.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel7.setText("Description");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(53, 263, 68, 15);
 
         mdes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mdesActionPerformed(evt);
             }
         });
+        getContentPane().add(mdes);
+        mdes.setBounds(209, 260, 114, 20);
 
         jLabel8.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel8.setText("Other Alvance");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(408, 26, 88, 15);
 
         lother.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lotherActionPerformed(evt);
             }
         });
+        getContentPane().add(lother);
+        lother.setBounds(536, 23, 101, 20);
 
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -125,38 +152,60 @@ public class Lorry extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(466, 298, 100, 35);
 
         jLabel9.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel9.setText("No. Load");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(408, 65, 53, 15);
 
         nol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nolActionPerformed(evt);
             }
         });
+        getContentPane().add(nol);
+        nol.setBounds(536, 61, 101, 20);
 
         jLabel10.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel10.setText("Diesel Rate");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(408, 104, 68, 15);
 
         lds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ldsActionPerformed(evt);
             }
         });
+        getContentPane().add(lds);
+        lds.setBounds(536, 101, 101, 20);
 
         jLabel11.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel11.setText("Diesel Quantity");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(408, 145, 97, 15);
 
         ldq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ldqActionPerformed(evt);
             }
         });
+        getContentPane().add(ldq);
+        ldq.setBounds(536, 142, 101, 20);
 
         jLabel12.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jLabel12.setText("Rent");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(408, 183, 28, 15);
+        getContentPane().add(lre);
+        lre.setBounds(536, 180, 101, 20);
 
         lorry.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L1", "L2", "L3", "L4" }));
+        getContentPane().add(lorry);
+        lorry.setBounds(209, 23, 114, 20);
+        getContentPane().add(ma);
+        ma.setBounds(209, 219, 114, 20);
 
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +213,8 @@ public class Lorry extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(365, 300, 80, 35);
 
         jButton3.setText("Exit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -171,105 +222,8 @@ public class Lorry extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addGap(12, 12, 12))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(aaa)
-                    .addComponent(bbbb)
-                    .addComponent(vvvv)
-                    .addComponent(vvvvdd)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(sakm)
-                    .addComponent(ldate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clkm)
-                    .addComponent(mdes)
-                    .addComponent(lorry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ma))
-                .addGap(85, 85, 85)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lother, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addComponent(nol)
-                    .addComponent(lds)
-                    .addComponent(ldq)
-                    .addComponent(lre))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lorry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ldate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bbbb)
-                            .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sakm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vvvv)
-                            .addComponent(jLabel10)
-                            .addComponent(lds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(clkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vvvvdd)
-                            .addComponent(jLabel11)
-                            .addComponent(ldq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(lre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(aaa)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
-                                .addComponent(lother, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(nol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mdes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(52, 52, 52))
-        );
+        getContentPane().add(jButton3);
+        jButton3.setBounds(584, 298, 70, 35);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

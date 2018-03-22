@@ -29,11 +29,12 @@ public class Start extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -41,8 +42,9 @@ public class Start extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
-        setPreferredSize(new java.awt.Dimension(700, 500));
-        setSize(new java.awt.Dimension(500, 500));
+        setMaximumSize(new java.awt.Dimension(1080, 720));
+        setPreferredSize(new java.awt.Dimension(900, 900));
+        setSize(new java.awt.Dimension(900, 900));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -57,12 +59,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(230, 140, 120, 30);
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/nbs/02-101.jpg"))); // NOI18N
-        jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(360, 150, 255, 207);
+        jButton5.setBounds(240, 250, 120, 30);
 
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton1.setText("Hitachi");
@@ -72,7 +69,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(60, 70, 110, 29);
+        jButton1.setBounds(40, 180, 110, 29);
 
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton2.setText("Monthly Bill");
@@ -82,7 +79,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(60, 140, 129, 29);
+        jButton2.setBounds(40, 250, 150, 29);
 
         jButton3.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton3.setText("Analysis Report");
@@ -92,7 +89,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(70, 220, 157, 29);
+        jButton3.setBounds(40, 320, 190, 29);
 
         jButton4.setFont(new java.awt.Font("Myriad Pro", 3, 14)); // NOI18N
         jButton4.setText("Lorry");
@@ -102,7 +99,23 @@ public class Start extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(240, 70, 66, 29);
+        jButton4.setBounds(260, 180, 66, 29);
+
+        jButton6.setFont(new java.awt.Font("Myriad Pro", 1, 14)); // NOI18N
+        jButton6.setText("Exit");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(490, 350, 90, 30);
+
+        jLabel1.setFont(new java.awt.Font("Stencil Std", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel1.setText("N.B.S Earth Movers");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(170, 20, 320, 50);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -141,6 +154,11 @@ public class Start extends javax.swing.JFrame {
         main.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,7 +201,8 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
