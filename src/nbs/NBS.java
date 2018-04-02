@@ -16,7 +16,7 @@ public class NBS {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Start main = new Start();
+        login main = new login();
         main.setVisible(true);
         
     }

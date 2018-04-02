@@ -6,6 +6,7 @@
 package nbs;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,6 +16,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -58,9 +60,7 @@ public class Mainf extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        sh = new javax.swing.JTextField();
         ch = new javax.swing.JTextField();
-        re = new javax.swing.JTextField();
         ds = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         dq = new javax.swing.JTextField();
@@ -75,80 +75,46 @@ public class Mainf extends javax.swing.JFrame {
         mregular = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        mrate = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        mdes = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        sh = new javax.swing.JLabel();
+        ma = new javax.swing.JLabel();
+        re = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1100, 600));
-        setSize(new java.awt.Dimension(1080, 720));
-        getContentPane().setLayout(null);
+        setMinimumSize(new java.awt.Dimension(1100, 650));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setSize(new java.awt.Dimension(1000, 600));
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel1.setText("Date");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(95, 142, 31, 17);
 
         jLabel2.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel2.setText("Starting Hour");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(95, 264, 91, 17);
 
         jLabel3.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel3.setText("Closing Hour");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(95, 302, 87, 17);
 
         jLabel4.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel4.setText("Rent");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(95, 340, 31, 17);
 
         jLabel5.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel5.setText("Diesel Rate");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(95, 378, 74, 17);
-
-        sh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                shActionPerformed(evt);
-            }
-        });
-        getContentPane().add(sh);
-        sh.setBounds(259, 263, 163, 20);
-        getContentPane().add(ch);
-        ch.setBounds(259, 301, 163, 20);
-
-        re.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reActionPerformed(evt);
-            }
-        });
-        getContentPane().add(re);
-        re.setBounds(259, 339, 166, 20);
 
         ds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dsActionPerformed(evt);
             }
         });
-        getContentPane().add(ds);
-        ds.setBounds(259, 377, 166, 20);
 
         jLabel6.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel6.setText("Diesel ");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(95, 403, 44, 17);
 
         dq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dqActionPerformed(evt);
             }
         });
-        getContentPane().add(dq);
-        dq.setBounds(259, 403, 166, 20);
 
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -156,30 +122,18 @@ public class Mainf extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(760, 400, 87, 35);
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(1076, 39, 0, 0);
 
         jLabel8.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel8.setText("Shift");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(95, 187, 31, 17);
 
         dayy.setFont(new java.awt.Font("Myriad Pro", 1, 11)); // NOI18N
         dayy.setText("Day");
-        getContentPane().add(dayy);
-        dayy.setBounds(258, 187, 45, 21);
 
         nightt.setFont(new java.awt.Font("Myriad Pro", 1, 11)); // NOI18N
         nightt.setText("Night");
-        getContentPane().add(nightt);
-        nightt.setBounds(258, 208, 57, 21);
 
         jLabel9.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel9.setText("Vechical ");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(95, 76, 60, 17);
 
         aaa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "v1", "v2", "v3", "v4" }));
         aaa.addActionListener(new java.awt.event.ActionListener() {
@@ -187,16 +141,12 @@ public class Mainf extends javax.swing.JFrame {
                 aaaActionPerformed(evt);
             }
         });
-        getContentPane().add(aaa);
-        aaa.setBounds(259, 73, 50, 20);
 
         da.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 daActionPerformed(evt);
             }
         });
-        getContentPane().add(da);
-        da.setBounds(258, 140, 110, 22);
 
         mregular.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nothing", "Engine oil \t        250", "Hydraulic oil\t        1000", "Hydraulic strainer  250", "Air filter                 250", "Diesel filter\t         250", "Track motor oil       1000", "Swing motor oil       500", "Swing bearing         500" }));
         mregular.addActionListener(new java.awt.event.ActionListener() {
@@ -204,33 +154,12 @@ public class Mainf extends javax.swing.JFrame {
                 mregularActionPerformed(evt);
             }
         });
-        getContentPane().add(mregular);
-        mregular.setBounds(837, 123, 140, 20);
 
         jLabel11.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel11.setText("Maintance Regular ");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(622, 122, 130, 17);
 
         jLabel12.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
         jLabel12.setText("Maintance RS");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(622, 152, 91, 17);
-
-        mrate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mrateActionPerformed(evt);
-            }
-        });
-        getContentPane().add(mrate);
-        mrate.setBounds(783, 151, 194, 20);
-
-        jLabel13.setFont(new java.awt.Font("Myriad Pro", 3, 16)); // NOI18N
-        jLabel13.setText("Description");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(622, 183, 77, 17);
-        getContentPane().add(mdes);
-        mdes.setBounds(780, 180, 194, 20);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Back");
@@ -239,8 +168,6 @@ public class Mainf extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(625, 400, 80, 35);
 
         jButton3.setText("Exit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -248,20 +175,147 @@ public class Mainf extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(920, 400, 60, 30);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(1076, 1076, 1076)
+                .addComponent(jLabel7))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel9)
+                .addGap(104, 104, 104)
+                .addComponent(aaa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addComponent(nightt))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel5)
+                .addGap(90, 90, 90)
+                .addComponent(ds, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(132, 132, 132)
+                        .addComponent(dayy)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(132, 132, 132)
+                        .addComponent(da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(284, 284, 284)
+                        .addComponent(jLabel11)
+                        .addGap(55, 55, 55)
+                        .addComponent(mregular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel6)
+                .addGap(120, 120, 120)
+                .addComponent(dq, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel12)
+                        .addGap(94, 94, 94)
+                        .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(ch, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                        .addComponent(sh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(re, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel9))
+                            .addComponent(aaa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(mregular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(dayy)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(nightt)
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(sh, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel3))
+                            .addComponent(ch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(re, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel5))
+                    .addComponent(ds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(dq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void shActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_shActionPerformed
-
-    private void reActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reActionPerformed
 
     private void dsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dsActionPerformed
         // TODO add your handling code here:
@@ -276,26 +330,76 @@ public class Mainf extends javax.swing.JFrame {
         DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String dateS = sdf.format(oDate);
         String vname = (String) aaa.getSelectedItem();
-        int shour = Integer.parseInt(sh.getText());
+        int shour = 0;//Integer.parseInt(sh.getText());
         int chour = Integer.parseInt(ch.getText());
-        int rent = Integer.parseInt(re.getText());
+        int rent = 0;//Integer.parseInt(re.getText());
         int drate = Integer.parseInt(ds.getText());
         int dquant = Integer.parseInt(dq.getText());
         String maregular = (String) mregular.getSelectedItem();
-        int marate = Integer.parseInt(mrate.getText());
-        String mades = mdes.getText();
+        int marate = 0;//Integer.parseInt(mrate.getText());
+        String mades = "issued";//mdes.getText();
         int i = 0;
         int dif = chour - shour;
         int ea = dif * rent;
         int tot = (ea - (dquant * drate)) - marate;
-
+int p1=0,q=0;
         String day = "", ni8 = "";
         if (dayy.isSelected()) {
-            day = "Day";
+            day = "Day";p1=1;
         }
         if (nightt.isSelected()) {
-            ni8 = "Night";
+            ni8 = "Night";q=1;
         }
+        String Driver = "org.gjt.mm.mysql.Driver";
+            String Url = "jdbc:mysql://localhost/test";
+        try {
+            Class.forName(Driver);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Mainf.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            try (Connection conn = DriverManager.getConnection(Url, "root", "")) {
+                PreparedStatement pz1 = conn.prepareStatement("SELECT * FROM hit ORDER BY vn");
+                pz1.executeQuery();
+                PreparedStatement pz5 = conn.prepareStatement("SELECT * FROM hit WHERE  vn=? ");
+                pz5.setString(1, vname);
+                ResultSet rz1 = pz5.executeQuery();
+                while (rz1.next()) {
+                    shour= rz1.getInt(5);
+                }
+                if(p1==1)
+            {
+                PreparedStatement pz6= conn .prepareStatement("SELECT * FROM aa  ");
+               // pz6.setString(1, vname);
+                ResultSet rz6 = pz6.executeQuery();
+                while (rz6.next()) {
+                    rent= rz6.getInt(9);
+                }
+                            }
+                 if(q==1)
+            {
+                
+                PreparedStatement pz2 = conn.prepareStatement("SELECT * FROM aa");
+              //  pz2.setString(1, vname);
+                ResultSet rz2 = pz2.executeQuery();
+                while (rz2.next()) {
+                    q= rz2.getInt(10);
+                    
+                }
+                rent=rent+q;
+            }
+            }
+            String my = Integer.toString(shour);
+            sh.setText(my);
+            String myn = Integer.toString(rent);
+            re.setText(myn);
+            
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(Mainf.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         
         String sf = day + "/" + ni8;
         FileInputStream FILE_NAME = null;
         try {
@@ -353,10 +457,173 @@ public class Mainf extends javax.swing.JFrame {
             Class.forName(myDriver);
             Connection conn = DriverManager.getConnection(myUrl, "root", "");
 
-            // create a sql date object so we can use it in our INSERT statement
-            Calendar calendar = Calendar.getInstance();
-            java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+         
+            String flag = null;
+            try {
+                switch (maregular) {
+                    case "Engine oil 	        250":
+                        String s = "SELECT * FROM v1 WHERE  vn=? ";
+                        PreparedStatement pst = conn.prepareStatement(s);
+                        pst.setString(1, vname);
+                        ResultSet r = pst.executeQuery();
+                        while (r.next()) {
+                            i = r.getInt(1);
+                        }
+                        PreparedStatement pq1 = conn.prepareStatement("SELECT * FROM aa ");
+                        
+                        ResultSet rq1 = pq1.executeQuery();
+                        while (r.next()) {
+                            marate = r.getInt(1);
+                        }
 
+                        if (i <= chour) {
+                            flag = "Engine oil";
+                        }
+                       
+                        break;
+                    case "Hydraulic oil	        1000":
+                        PreparedStatement pst1 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+                        pst1.setString(1, vname);
+                        ResultSet r1 = pst1.executeQuery();
+                        while (r1.next()) {
+                            i = r1.getInt(3);
+                        }
+                        if (i <= chour) {
+                            flag = "Hydraulic oil 1000";
+                        }
+                        PreparedStatement pa2 = conn.prepareStatement("SELECT * FROM aa  ");
+                        ResultSet ra1 =  pa2.executeQuery();
+                        while(ra1.next())
+                        {
+                            marate=ra1.getInt(2);
+                        }
+                        
+                    case "Hydraulic strainer  250":
+                        PreparedStatement pst2 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+                        pst2.setString(1, vname);
+                        ResultSet rr2r = pst2.executeQuery();
+                        while (rr2r.next()) {
+                            i = rr2r.getInt(4);
+                        }
+                        if (i <= chour) {
+                            flag = "Hydraulic strainer  250";
+                        }
+
+                        PreparedStatement p2p = conn.prepareStatement("SELECT * FROM aa  ");
+                        ResultSet raa1 =  p2p.executeQuery();
+                        while(raa1.next())
+                        {
+                            marate=raa1.getInt(3);
+                        }
+
+                        break;
+                    case "Air filter                 250":
+                        PreparedStatement pst3 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+                        pst3.setString(1, vname);
+                        ResultSet r3 = pst3.executeQuery();
+                        while (r3.next()) {
+                            i = r3.getInt(5);
+                        }
+                        if (i <= chour) {
+                            flag = "Air filter 250";
+                        }
+
+                         PreparedStatement pb2 = conn.prepareStatement("SELECT * FROM aa  ");
+                        ResultSet rb1 =  pb2.executeQuery();
+                        while(rb1.next())
+                        {
+                            marate=rb1.getInt(4);
+                        }
+                        break;
+                    case "Diesel filter	         250":
+                        PreparedStatement pst4 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+                        pst4.setString(1, vname);
+                        ResultSet r4 = pst4.executeQuery();
+                        while (r4.next()) {
+                            i = r4.getInt(6);
+                        }
+                        if (i <= chour) {
+                            flag = "Diesel filter 250";
+                        }
+
+                       PreparedStatement pp2 = conn.prepareStatement("SELECT * FROM aa  ");
+                        ResultSet rp1 =  pp2.executeQuery();
+                       while(rp1.next())
+                        {
+                            marate=rp1.getInt(5);
+                        }
+                        break;
+
+                    case "Track motor oil       1000":
+                        PreparedStatement pst5 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+                        pst5.setString(1, vname);
+                        ResultSet r5 = pst5.executeQuery();
+                        while (r5.next()) {
+                            i = r5.getInt(7);
+                        }
+                        if (i <= chour) {
+                            flag = "Track motor oil 1000";
+                        }
+
+                        PreparedStatement p02 = conn.prepareStatement("SELECT * FROM aa  ");
+                        ResultSet r01 =  p02.executeQuery();
+                        while(r01.next())
+                        {
+                            marate=r01.getInt(6);
+                        }
+                       
+                        break;
+                        
+                    case "Swing motor oil       500":
+                        PreparedStatement pst6 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+                        pst6.setString(1, vname);
+                        ResultSet r6 = pst6.executeQuery();
+                        while (r6.next()) {
+                            i = r6.getInt(8);
+                        }
+                        if (i <= chour) {
+                            flag = "Swing motor oil 500";
+                        }
+
+                       PreparedStatement pe2 = conn.prepareStatement("SELECT * FROM aa  ");
+                        ResultSet re1 =  pe2.executeQuery();
+                        while(re1.next())
+                        {
+                            marate=re1.getInt(7);
+                        }
+
+                    case "Swing bearing         500":
+                        PreparedStatement pst7 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
+                        pst7.setString(1, vname);
+                        ResultSet r7 = pst7.executeQuery();
+                        while (r7.next()) {
+                            i = r7.getInt(9);
+                        }
+                        if (i <= chour) {
+                            flag = "Swing bearing   500";
+                        }
+                        chour = chour + 500;
+                        PreparedStatement pr2 = conn.prepareStatement("SELECT * FROM aa  ");
+                        ResultSet rr1 =  pr2.executeQuery();
+                        while(rr1.next())
+                        {
+                            marate=rr1.getInt(8);
+                        }
+                    case "Nothing":
+                        System.out.print("switch done");
+                        break;
+                }
+                 String my = Integer.toString(marate);
+            ma.setText(my);
+               
+                if (flag != null) {
+                    JOptionPane.showMessageDialog(null, "Your excavator \t" + vname + " \t" + flag + "\t next change is  :\t" + chour + " Hr");
+                }
+            } catch (SQLException | HeadlessException e) {
+                System.err.println("Got an exception!");
+                System.err.println(e.getMessage());
+            }
+  System.out.println(marate);
             // the mysql insert statement
             String query = " insert into hit (Date,vn,Shift,Sh,Ch,Rent,RHour,DRate,DQuantity,Earning,MRegular,MRate,total,MDes)"
                     + " values (?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?)";
@@ -389,7 +656,7 @@ public class Mainf extends javax.swing.JFrame {
                 p.setString(1, vname);
                 ResultSet rq = p.executeQuery();
                 while (rq.next()) {
-                    if (maregular == "Nothing") {
+                    if ("Nothing".equals(maregular)) {
                         if (chour > rq.getInt(2)) {
                             z = 1;
                             f = "Engine oil";
@@ -424,7 +691,7 @@ public class Mainf extends javax.swing.JFrame {
                         }
 
                     }
-                }
+                }conn.close();
                 if (z == 1) {
                     JOptionPane.showMessageDialog(null, "Your\t " + f + "," + e + "," + h + "," + a + "," + d + "," + t + "," + s + "," + b + " \tchange is expire");
                 }
@@ -433,157 +700,6 @@ public class Mainf extends javax.swing.JFrame {
                 System.err.println(e.getMessage());
             }
 
-            String flag = null;
-            try {
-                switch (maregular) {
-                    case "Engine oil 	        250":
-                        String s = "SELECT * FROM v1 WHERE  vn=? ";
-                        PreparedStatement pst = conn.prepareStatement(s);
-                        pst.setString(1, vname);
-                        ResultSet r = pst.executeQuery();
-                        while (r.next()) {
-                            i = r.getInt(2);
-                        }
-
-                        if (i <= chour) {
-                            flag = "Engine oil";
-                        }
-                        System.out.print(flag);
-                        String ss = "update v1 set en = ? where vn = ?";
-                        PreparedStatement p22 = conn.prepareStatement(ss);
-                        chour = chour + 250;
-                        p22.setInt(1, chour);
-                        p22.setString(2, vname);
-                        p22.executeUpdate();
-                        break;
-                    case "Hydraulic oil	        1000":
-                        PreparedStatement pst1 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
-                        pst1.setString(1, vname);
-                        ResultSet r1 = pst1.executeQuery();
-                        while (r1.next()) {
-                            i = r1.getInt(3);
-                        }
-                        if (i <= chour) {
-                            flag = "Hydraulic oil 1000";
-                        }
-                        PreparedStatement p2 = conn.prepareStatement("update v1 set hyo = ? where vn = ?");
-                        chour = chour + 1000;
-                        p2.setString(2, vname);
-                        p2.setInt(1, chour);
-                        p2.executeUpdate();
-                    case "Hydraulic strainer  250":
-                        PreparedStatement pst2 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
-                        pst2.setString(1, vname);
-                        ResultSet rr2r = pst2.executeQuery();
-                        while (rr2r.next()) {
-                            i = rr2r.getInt(4);
-                        }
-                        if (i <= chour) {
-                            flag = "Hydraulic strainer  250";
-                        }
-
-                        PreparedStatement p2p = conn.prepareStatement("update v1 set hys = ? where vn = ?");
-                        p2p.setString(2, vname);
-                        chour = chour + 250;
-                        p2p.setInt(1, chour);
-                        p2p.executeUpdate();
-
-                        break;
-                    case "Air filter                 250":
-                        PreparedStatement pst3 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
-                        pst3.setString(1, vname);
-                        ResultSet r3 = pst3.executeQuery();
-                        while (r3.next()) {
-                            i = r3.getInt(5);
-                        }
-                        if (i <= chour) {
-                            flag = "Air filter 250";
-                        }
-
-                        PreparedStatement p2a = conn.prepareStatement("update v1 set af = ? where vn = ?");
-                        p2a.setString(2, vname);
-                        chour = chour + 250;
-                        p2a.setInt(1, chour);
-                        p2a.executeUpdate();
-                        break;
-                    case "Diesel filter	         250":
-                        PreparedStatement pst4 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
-                        pst4.setString(1, vname);
-                        ResultSet r4 = pst4.executeQuery();
-                        while (r4.next()) {
-                            i = r4.getInt(6);
-                        }
-                        if (i <= chour) {
-                            flag = "Diesel filter 250";
-                        }
-
-                        PreparedStatement p2z = conn.prepareStatement("update v1 set df = ? where vn = ?");
-                        p2z.setString(2, vname);
-                        chour = chour + 250;
-                        p2z.setInt(1, chour);
-                        p2z.executeUpdate();
-                        break;
-
-                    case "Track motor oil       1000":
-                        PreparedStatement pst5 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
-                        pst5.setString(1, vname);
-                        ResultSet r5 = pst5.executeQuery();
-                        while (r5.next()) {
-                            i = r5.getInt(7);
-                        }
-                        if (i <= chour) {
-                            flag = "Track motor oil 1000";
-                        }
-
-                        PreparedStatement p2b = conn.prepareStatement("update v1 set tm = ? where vn = ?");
-                        p2b.setString(2, vname);
-                        chour = chour + 1000;
-                        p2b.setInt(1, chour);
-                        p2b.executeUpdate();
-                    case "Swing motor oil       500":
-                        PreparedStatement pst6 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
-                        pst6.setString(1, vname);
-                        ResultSet r6 = pst6.executeQuery();
-                        while (r6.next()) {
-                            i = r6.getInt(8);
-                        }
-                        if (i <= chour) {
-                            flag = "Swing motor oil 500";
-                        }
-
-                        PreparedStatement p2q = conn.prepareStatement("update v1 set sm = ? where vn = ?");
-                        p2q.setString(2, vname);
-                        chour = chour + 500;
-                        p2q.setInt(1, chour);
-                        p2q.executeUpdate();
-
-                    case "Swing bearing         500":
-                        PreparedStatement pst7 = conn.prepareStatement("SELECT * FROM v1 WHERE  vn=? ");
-                        pst7.setString(1, vname);
-                        ResultSet r7 = pst7.executeQuery();
-                        while (r7.next()) {
-                            i = r7.getInt(9);
-                        }
-                        if (i <= chour) {
-                            flag = "Swing bearing   500";
-                        }
-                        chour = chour + 500;
-                        PreparedStatement p2v = conn.prepareStatement("update v1 set sb = ? where vn = ?");
-                        p2v.setString(2, vname);
-                        p2v.setInt(1, chour);
-                        p2v.executeUpdate();
-                    case "Nothing":
-                        System.out.print("switch done");
-                        break;
-                }
-                conn.close();
-                if (flag != null) {
-                    JOptionPane.showMessageDialog(null, "Your excavator \t" + vname + " \t" + flag + "\t next change is  :\t" + chour + " Hr");
-                }
-            } catch (Exception e) {
-                System.err.println("Got an exception!");
-                System.err.println(e.getMessage());
-            }
         } catch (Exception e) {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
@@ -603,10 +719,6 @@ public class Mainf extends javax.swing.JFrame {
     private void mregularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mregularActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mregularActionPerformed
-
-    private void mrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mrateActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -673,7 +785,6 @@ public class Mainf extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -682,11 +793,10 @@ public class Mainf extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField mdes;
-    private javax.swing.JTextField mrate;
+    private javax.swing.JLabel ma;
     private javax.swing.JComboBox<String> mregular;
     private javax.swing.JCheckBox nightt;
-    private javax.swing.JTextField re;
-    private javax.swing.JTextField sh;
+    private javax.swing.JLabel re;
+    private javax.swing.JLabel sh;
     // End of variables declaration//GEN-END:variables
 }
