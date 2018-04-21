@@ -178,74 +178,75 @@ public class lreport extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          DefaultTableModel model;
+        DefaultTableModel model;
         model = (DefaultTableModel) table.getModel();
         while (model.getRowCount() > 0) {
-            model.removeRow(model.getRowCount() - 1);}
-            
-          Date fdate = fr.getDate();
-                DateFormat esdf = new SimpleDateFormat("dd-MM-yyyy");
-                String datef = esdf.format(fdate);
+            model.removeRow(model.getRowCount() - 1);
+        }
 
-                //to date
-                Date tate = to.getDate();
-                String ln = (String) lna.getSelectedItem();
-                DateFormat asdf = new SimpleDateFormat("dd-MM-yyyy");
-                String datet = asdf.format(tate);
-                ResultSet resultSet = null;
-             
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(lreport.class.getName()).log(Level.SEVERE, null, ex);
+        Date fdate = fr.getDate();
+        DateFormat esdf = new SimpleDateFormat("dd-MM-yyyy");
+        String datef = esdf.format(fdate);
+
+        //to date
+        Date tate = to.getDate();
+        String ln = (String) lna.getSelectedItem();
+        DateFormat asdf = new SimpleDateFormat("dd-MM-yyyy");
+        String datet = asdf.format(tate);
+        ResultSet resultSet = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(lreport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
+
+            //here test is database name, root is username
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM lor WHERE (Date BETWEEN ? AND ?)AND Lname=?");
+            pst.setString(1, datef);
+            pst.setString(2, datet);
+            pst.setString(3, ln);
+            resultSet = pst.executeQuery();
+            ResultSetMetaData md = resultSet.getMetaData();
+            int colnum = md.getColumnCount();
+            String Row[];
+            int flag = 0;
+            String Check = "";
+            Row = new String[colnum];
+            while (resultSet.next()) {
+                for (int i = 1; i <= colnum; i++) {
+                    if (i == colnum) {
+                        if (resultSet.getString(i) == null) {
+
+                            model.addRow(Row);
+                        } else {
+                            if (flag == 1) {
+                                continue;
+                            }
+
+                            model.addRow(Row);
+                        }
+                        System.out.println(resultSet.getString(i));
+                    } else {
+                        Row[i - 1] = resultSet.getString(i);
+                    }
+
                 }
-                  Connection con =null;
-              try{
-                    con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
-               
-                        //here test is database name, root is username
-                        PreparedStatement pst = con.prepareStatement("SELECT * FROM lor WHERE (Date BETWEEN ? AND ?)AND Lname=?");
-                        pst.setString(1, datef);
-                        pst.setString(2, datet);
-                        pst.setString(3,ln );
-                        resultSet = pst.executeQuery();
-                      ResultSetMetaData md = resultSet.getMetaData();
-                        int colnum = md.getColumnCount();
-                        String Row[];
-                        int flag = 0;
-                        String Check = "";
-                        Row = new String[colnum];
-                        while (resultSet.next()) {
-                            for (int i = 1; i <= colnum; i++) {
-                                if (i == colnum) {
-                                    if (resultSet.getString(i) == null) {
-                                        
-                                        model.addRow(Row);
-                                    } else {
-                                        if (flag == 1) {
-                                            continue;
-                                        }
-                                       
-                                        model.addRow(Row);
-                                    }
-                                    System.out.println(resultSet.getString(i));
-                                } else {
-                                    Row[i - 1] = resultSet.getString(i);
-                                }
+            }
+        } catch (Exception a) {
+            System.err.println("Got an exception!");
+            System.err.println(a.getMessage());
+        }
 
-
-                             
-                            }}} catch (Exception a) {
-                        System.err.println("Got an exception!");
-                        System.err.println(a.getMessage());}
-                       
     }//GEN-LAST:event_jButton1ActionPerformed
 
-            
-            
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Start m= new Start();
+        Start m = new Start();
         m.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
